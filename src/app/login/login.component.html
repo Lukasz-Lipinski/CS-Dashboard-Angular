@@ -1,0 +1,14 @@
+<section class="border-2">
+  <form [formGroup]="panelForm" class="flex flex-col p-5 gap-3">
+    <label *ngFor="let label of labels" for="">
+      <span> {{ label.inputName }}: </span>
+      <input
+        [type]="label.inputType"
+        class="border-2"
+        [formControlName]="label.inputName"
+      />
+    </label>
+
+    <button type="submit">Zaloguj</button>
+  </form>
+</section>
