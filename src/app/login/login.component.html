@@ -1,14 +1,49 @@
-<section class="border-2">
-  <form [formGroup]="panelForm" class="flex flex-col p-5 gap-3">
-    <label *ngFor="let label of labels" for="">
-      <span> {{ label.inputName }}: </span>
-      <input
-        [type]="label.inputType"
-        class="border-2"
-        [formControlName]="label.inputName"
-      />
-    </label>
+<div class="flex justify-center items-center w-full h-screen bg-slate-100">
+  <section
+    class="flex justify-center items-center border-4 border-yellow-400 shadow-xl rounded-md"
+  >
+    <form
+      [formGroup]="panelForm"
+      class="flex flex-col p-10 gap-3 bg-yellow-300"
+    >
+      <label *ngFor="let label of labels" class="flex justify-between">
+        <span class="pr-4 text-xl"> {{ label.inputName | upperletter }}: </span>
+        <input
+          [type]="label.inputType"
+          class="border-2 rounded p-1 text-lg"
+          [formControlName]="label.inputName"
+        />
+      </label>
 
-    <button type="submit">Zaloguj</button>
-  </form>
-</section>
+      <div class="flex justify-center text-base text-blue-800">
+        <button
+          (click)="setOption('register')"
+          class="px-2 py-3 hover:underline"
+          [ngClass]="formType === 'register' ? 'text-blue-400' : ''"
+        >
+          Rejestracja
+        </button>
+        <span class="px-2 py-3"> | </span>
+        <button
+          (click)="setOption('signin')"
+          class="px-2 py-3 hover:underline"
+          [ngClass]="formType === 'signin' ? 'text-blue-400' : ''"
+        >
+          Logowanie
+        </button>
+      </div>
+
+      <button
+        class="rounded px-2 py-3 shadow-md mt-6"
+        [ngClass]="
+          panelForm.valid
+            ? 'border-2 border-green-500 hover:bg-green-400 bg-green-300 cursor-pointer'
+            : 'border-2 border-red-500 text-red-600 bg-red-400 cursor-not-allowed'
+        "
+        type="submit"
+      >
+        {{ formType === "register" ? "Zarejestruj" : "Zaloguj" }}
+      </button>
+    </form>
+  </section>
+</div>
