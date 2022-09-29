@@ -4,6 +4,7 @@
   >
     <form
       [formGroup]="panelForm"
+      (submit)="submit()"
       class="flex flex-col p-10 gap-3 bg-yellow-300"
     >
       <label *ngFor="let label of labels" class="flex justify-between">
@@ -34,11 +35,11 @@
       </div>
 
       <button
-        class="rounded px-2 py-3 shadow-md mt-6"
+        class="rounded px-2 py-3 shadow-md mt-6 border-2 cursor-pointer"
         [ngClass]="
           panelForm.valid
-            ? 'border-2 border-green-500 hover:bg-green-400 bg-green-300 cursor-pointer'
-            : 'border-2 border-red-500 text-red-600 bg-red-400 cursor-not-allowed'
+            ? 'border-lime-500 hover:bg-lime-200 bg-lime-300'
+            : 'border-red-500 hover:bg-red-400 text-red-600 bg-red-400 cursor-not-allowed'
         "
         type="submit"
       >
@@ -47,3 +48,5 @@
     </form>
   </section>
 </div>
+
+<ng-template appSnackbar></ng-template>

@@ -1,0 +1,12 @@
+<div class="fixed flex justify-center bottom-2 w-full" *ngIf="message">
+  <p
+    class="border-2 p-4 flex justify-center items-center w-fit text-lg rounded-md shadow"
+    [ngClass]="
+      isError
+        ? 'bg-red-400 border-red-600 text-red-600'
+        : 'bg-lime-300 border-2 border-lime-500 text-lime-500'
+    "
+  >
+    {{ message }}
+  </p>
+</div>
