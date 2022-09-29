@@ -49,29 +49,24 @@ export class LoginComponent implements OnInit {
   submit() {
     let email: string;
     let password: string;
-    let viewContainerRef = this.snackbarComponent.viewContainerRef;
-    viewContainerRef.clear();
 
     if (this.panelForm.valid) {
       email = this.panelForm.controls['email'].value;
       password = this.panelForm.controls['password'].value;
-      const snackbar =
-        viewContainerRef.createComponent<SnackbarComponent>(SnackbarComponent);
 
       if (this.formType === 'register') {
         this.authService.register({ email, password }).subscribe({
           next: (res) => {
-            snackbar.instance.isError = false;
-            snackbar.instance.message = 'Account created successfully';
-            this.panelForm.reset();
+            const message: string = `${res.email} was registered successfully`;
+            this.createSnackbar(message, false);
           },
           error: (error: HttpErrorResponse) => {
-            snackbar.instance.isError = true;
-            snackbar.instance.message = error.error.error.message;
-            console.log(snackbar);
+            const { message } = error.error.error;
+            this.createSnackbar(message, true);
           },
         });
 
+        this.panelForm.reset();
         return;
       }
 
@@ -81,10 +76,30 @@ export class LoginComponent implements OnInit {
           this.router.navigate(['dashboard']);
         },
         error: (error: HttpErrorResponse) => {
-          snackbar.instance.isError = true;
-          snackbar.instance.message = error.error.error.message;
+          const { message } = error.error.error;
+          this.createSnackbar(message, true);
         },
       });
+      this.panelForm.reset();
     }
+  }
+
+  createSnackbar(message: string, isError: boolean) {
+    let viewContainerRef = this.snackbarComponent.viewContainerRef;
+    viewContainerRef.clear();
+
+    const snackbar =
+      viewContainerRef.createComponent<SnackbarComponent>(SnackbarComponent);
+
+    snackbar.instance.isError = isError;
+    snackbar.instance.message = message;
+
+    this.timer = setTimeout(() => {
+      snackbar.destroy();
+    }, 3000);
+  }
+
+  ngOnDestroy() {
+    clearTimeout(this.timer);
   }
 }

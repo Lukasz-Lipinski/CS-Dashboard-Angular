@@ -9,7 +9,13 @@ const routes: Routes = [
   {
     path: 'dashboard',
     component: DashboardComponent,
-    canActivate: [DashboardGuard],
+    // canActivate: [DashboardGuard],
+    children: [
+      { path: 'profile', component: LoginComponent },
+      { path: 'add', component: LoginComponent },
+      { path: 'remove', component: LoginComponent },
+      { path: 'update', component: LoginComponent },
+    ],
   },
   {
     path: '**',
