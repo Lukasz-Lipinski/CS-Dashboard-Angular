@@ -12,12 +12,12 @@ export interface Link {
 export class MenuService {
   upperMenuLinks: Link[] = [
     { label: 'Strona główna', href: '/dashboard', icon: 'home' },
-    { label: 'Profil', href: 'profile', icon: 'face2' },
+    { label: 'Profil', href: 'profile', icon: 'face' },
   ];
   sideMenuLinks: Link[] = [
-    { label: 'Dodaj produkt', href: 'add' },
-    { label: 'Usuń produkt', href: 'remove' },
-    { label: 'Zmodyfikuj produkt', href: 'update' },
+    { label: 'Dodaj produkt', href: 'add', icon: 'library_add' },
+    { label: 'Usuń produkt', href: 'remove', icon: 'delete_forever' },
+    { label: 'Aktualizuj', href: 'update', icon: 'file_upload' },
   ];
 
   constructor() {}

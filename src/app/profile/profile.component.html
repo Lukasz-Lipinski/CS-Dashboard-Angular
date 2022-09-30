@@ -1,0 +1,16 @@
+<section class="p-64">
+  <h1>User name</h1>
+  <div>
+    <div>
+      <p>Email: {{ email }}</p>
+      <p>
+        Password: <span>{{ getPassword }}</span>
+        <span class="material-icons cursor-pointer" (click)="showPassword()">{{
+          isHidden ? "visibility" : "invisibility_off"
+        }}</span>
+      </p>
+    </div>
+
+    <div></div>
+  </div>
+</section>

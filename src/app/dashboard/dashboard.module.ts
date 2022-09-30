@@ -6,11 +6,12 @@ import { DashboardComponent } from './dashboard.component';
 import { MenuComponent } from '../menu/menu.component';
 import { DashboardGuard } from './dashborad.guard';
 import { AppRoutingModule } from '../app-routing.module';
+import { SidebarComponent } from '../sidebar/sidebar.component';
 
 @NgModule({
-  imports: [CommonModule, AppRoutingModule, MatIconModule],
+  declarations: [DashboardComponent, MenuComponent, SidebarComponent],
   exports: [AppRoutingModule],
-  declarations: [DashboardComponent, MenuComponent],
+  imports: [CommonModule, AppRoutingModule, MatIconModule],
   providers: [DashboardGuard],
 })
 export class DashboardModule {}

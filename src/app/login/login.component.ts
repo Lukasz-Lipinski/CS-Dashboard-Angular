@@ -2,6 +2,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit, ViewChild, ViewContainerRef } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { ProfileService } from '../profile/profile.service';
 import { SnackbarComponent } from '../snackbar/snackbar.component';
 import { SnackbarDirective } from '../snackbar/snackbar.directive';
 import { AuthService } from './auth.service';
@@ -27,7 +28,8 @@ export class LoginComponent implements OnInit {
   constructor(
     private builder: FormBuilder,
     private authService: AuthService,
-    private router: Router
+    private router: Router,
+    private profileService: ProfileService
   ) {}
 
   ngOnInit() {
@@ -78,6 +80,7 @@ export class LoginComponent implements OnInit {
         error: (error: HttpErrorResponse) => {
           const { message } = error.error.error;
           this.createSnackbar(message, true);
+          this.profileService.profileData.next({ email, password });
         },
       });
       this.panelForm.reset();
