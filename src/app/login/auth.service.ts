@@ -44,7 +44,10 @@ export class AuthService {
       returnSecureToken: true,
     };
 
-    console.log(body);
     return this.http.post<Response>(this.registerURL, body);
+  }
+
+  signout() {
+    this.logged.next(false);
   }
 }
