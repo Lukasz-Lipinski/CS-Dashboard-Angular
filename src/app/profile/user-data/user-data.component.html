@@ -1,0 +1,25 @@
+<div
+  class="border-2 p-10 rounded-lg shadow-lg bg-gradient-to-tl from-neutral-100 to-yellow-100"
+>
+  <h1 class="text-center font-bold pb-8">
+    User data
+    <hr />
+  </h1>
+  <div class="flex flex-col gap-5">
+    <p>
+      <span class="pr-4"> Email: </span>
+      <span>
+        {{ email }}
+      </span>
+    </p>
+    <p>
+      <span class="pr-4"> Password: </span>
+      <span
+        >{{ getPassword }}
+        <span class="material-icons cursor-pointer" (click)="showPassword()">{{
+          isHidden ? "visibility" : "invisibility_off"
+        }}</span>
+      </span>
+    </p>
+  </div>
+</div>

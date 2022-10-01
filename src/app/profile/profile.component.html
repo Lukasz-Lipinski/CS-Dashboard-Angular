@@ -1,16 +1,6 @@
-<section class="p-64">
-  <h1>User name</h1>
-  <div>
-    <div>
-      <p>Email: {{ email }}</p>
-      <p>
-        Password: <span>{{ getPassword }}</span>
-        <span class="material-icons cursor-pointer" (click)="showPassword()">{{
-          isHidden ? "visibility" : "invisibility_off"
-        }}</span>
-      </p>
-    </div>
-
-    <div></div>
-  </div>
+<section class="flex justify-center p-6 gap-16 items-center h-screen text-2xl">
+  <app-user-data></app-user-data>
+  <app-update-user-data></app-update-user-data>
 </section>
+
+<ng-template></ng-template>

@@ -1,0 +1,47 @@
+<div
+  class="border-2 flex flex-col p-10 gap-8 bg-gradient-to-tl to-yellow-100 from-slate-100 rounded-lg shadow-lg"
+>
+  <h1 class="font-bold pb-6 text-center">
+    Change password
+    <hr />
+  </h1>
+  <label>
+    <span>New password: </span>
+    <input
+      type="password"
+      class="rounded p-1"
+      [(ngModel)]="newPassword"
+      name="newPassword"
+      required
+      minlength="6"
+    />
+  </label>
+
+  <label class="flex flex-col text-center">
+    <span class="pb-2"> Assign current password to proceed </span>
+    <input
+      type="password"
+      class="rounded p-1"
+      name="currentPassword"
+      [(ngModel)]="currentPassword"
+      required
+    />
+  </label>
+
+  <div class="flex justify-center">
+    <button
+      [disabled]="
+        (!currentPassword && !newPassword) || currentPassword !== newPassword
+      "
+      (click)="updateData()"
+      class="border-2 rounded shadow-md p-4"
+      [ngClass]="
+        (!currentPassword && !newPassword) || currentPassword !== newPassword
+          ? 'cursor-not-allowed bg-red-300 text-red-500 border-red-500'
+          : 'cursor-pointer bg-lime-300 text-lime-500 border-lime-500'
+      "
+    >
+      Change
+    </button>
+  </div>
+</div>

@@ -24,6 +24,7 @@ export class LoginComponent implements OnInit {
   ];
   formType: FormType = 'signin';
   timer: any;
+  
 
   constructor(
     private builder: FormBuilder,
