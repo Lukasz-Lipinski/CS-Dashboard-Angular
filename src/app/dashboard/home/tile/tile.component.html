@@ -1,4 +1,7 @@
-<button (click)="navigate()" class="shadow border-2 rounded-lg">
-  <span>{{ icon }}</span>
-  <p>{{ text }}</p>
+<button
+  (click)="navigate()"
+  class="shadow-lg border-2 rounded-2xl p-10 text-base hover:-translate-y-2 hover:shadow-2xl ease-in-out translate-y-0 duration-200"
+>
+  <span class="material-icons text-8xl">{{ icon }}</span>
+  <p class="pt-4 font-semibold">{{ text | uppercase }}</p>
 </button>

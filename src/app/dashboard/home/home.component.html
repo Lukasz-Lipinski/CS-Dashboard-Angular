@@ -1,1 +1,8 @@
-<app-tile *ngFor="let tile of tiles"></app-tile>
+<div class="flex p-8 justify-center gap-10 flex-wrap">
+  <app-tile
+    *ngFor="let tile of tiles"
+    [icon]="tile.icon"
+    [navigation]="tile.navigation"
+    [text]="tile.text"
+  ></app-tile>
+</div>
