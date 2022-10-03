@@ -5,7 +5,7 @@
     Change password
     <hr />
   </h1>
-  <label>
+  <label class="text-lg">
     <span>New password: </span>
     <input
       type="password"
@@ -17,7 +17,7 @@
     />
   </label>
 
-  <label class="flex flex-col text-center">
+  <label class="flex flex-col text-center text-lg">
     <span class="pb-2"> Assign current password to proceed </span>
     <input
       type="password"
@@ -28,15 +28,15 @@
     />
   </label>
 
-  <div class="flex justify-center">
+  <div class="flex justify-center text-lg">
     <button
       [disabled]="
-        (!currentPassword && !newPassword) || currentPassword !== newPassword
+        (!currentPassword && !newPassword) || currentPassword === newPassword
       "
       (click)="updateData()"
       class="border-2 rounded shadow-md p-4"
       [ngClass]="
-        (!currentPassword && !newPassword) || currentPassword !== newPassword
+        (!currentPassword && !newPassword) || currentPassword === newPassword
           ? 'cursor-not-allowed bg-red-300 text-red-500 border-red-500'
           : 'cursor-pointer bg-lime-300 text-lime-500 border-lime-500'
       "

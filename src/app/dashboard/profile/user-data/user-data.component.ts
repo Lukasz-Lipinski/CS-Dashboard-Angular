@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AuthService } from '../../../login/auth.service';
 import { ProfileService } from '../profile.service';
 
 @Component({
@@ -14,7 +15,7 @@ export class UserDataComponent implements OnInit {
   constructor(private profileService: ProfileService) {}
 
   ngOnInit() {
-    this.profileService.profileData.subscribe({
+    this.profileService.profile.subscribe({
       next: ({ email, password }) => {
         this.email = email;
         this.password = password;

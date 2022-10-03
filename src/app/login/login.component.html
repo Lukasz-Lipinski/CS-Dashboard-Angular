@@ -5,7 +5,7 @@
     <form
       [formGroup]="panelForm"
       (submit)="submit()"
-      class="flex flex-col p-10 gap-3 bg-yellow-300"
+      class="flex flex-col p-10 gap-3 bg-yellow-200"
     >
       <label *ngFor="let label of labels" class="flex justify-between">
         <span class="pr-4 text-xl"> {{ label.inputName | upperletter }}: </span>

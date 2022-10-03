@@ -8,7 +8,7 @@ interface Request {
   returnSecureToken: boolean;
 }
 
-interface Response {
+export interface Response {
   idToken: string;
   email: string;
   refreshToken: string;
@@ -21,7 +21,15 @@ interface Response {
   providedIn: 'root',
 })
 export class AuthService {
-  logged = new BehaviorSubject<boolean>(false);
+  userData = new BehaviorSubject<Response>({
+    email: '',
+    ExpiresIn: '',
+    idToken: '',
+    localId: '',
+    refreshToken: '',
+    registered: false,
+  });
+
   registerURL: string =
     'https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyBNx6TyDav3mL1hFYkpKG5XGvAJ6P9NGTE';
   signinURL =
@@ -47,7 +55,10 @@ export class AuthService {
     return this.http.post<Response>(this.registerURL, body);
   }
 
-  signout() {
-    this.logged.next(false);
+  signout(userData: Response) {
+    this.userData.next({
+      ...userData,
+      registered: false,
+    });
   }
 }

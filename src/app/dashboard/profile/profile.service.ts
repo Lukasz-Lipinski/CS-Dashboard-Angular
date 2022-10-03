@@ -1,19 +1,12 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 
-interface Profile {
-  email: string;
-  password: string;
-}
-
 @Injectable({
   providedIn: 'root',
 })
 export class ProfileService {
-  profileData = new BehaviorSubject<Profile>({
+  profile = new BehaviorSubject<{ email: string; password: string }>({
     email: '',
-    password: 'asdsdf',
+    password: '',
   });
-
-  constructor() {}
 }

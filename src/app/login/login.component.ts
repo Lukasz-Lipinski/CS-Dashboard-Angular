@@ -1,8 +1,9 @@
 import { HttpErrorResponse } from '@angular/common/http';
-import { Component, OnInit, ViewChild, ViewContainerRef } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { ProfileService } from '../profile/profile.service';
+import { Subscription } from 'rxjs';
+import { ProfileService } from '../dashboard/profile/profile.service';
 import { SnackbarComponent } from '../snackbar/snackbar.component';
 import { SnackbarDirective } from '../snackbar/snackbar.directive';
 import { AuthService } from './auth.service';
@@ -24,7 +25,7 @@ export class LoginComponent implements OnInit {
   ];
   formType: FormType = 'signin';
   timer: any;
-  
+  subscription: Subscription = new Subscription();
 
   constructor(
     private builder: FormBuilder,
@@ -58,32 +59,36 @@ export class LoginComponent implements OnInit {
       password = this.panelForm.controls['password'].value;
 
       if (this.formType === 'register') {
-        this.authService.register({ email, password }).subscribe({
+        this.subscription = this.authService
+          .register({ email, password })
+          .subscribe({
+            next: (res) => {
+              const message: string = `${res.email} was registered successfully`;
+              this.createSnackbar(message, false);
+            },
+            error: (error: HttpErrorResponse) => {
+              const { message } = error.error.error;
+              this.createSnackbar(message, true);
+            },
+          });
+
+        this.panelForm.reset();
+        return;
+      }
+
+      this.subscription = this.authService
+        .signin({ email, password })
+        .subscribe({
           next: (res) => {
-            const message: string = `${res.email} was registered successfully`;
-            this.createSnackbar(message, false);
+            this.authService.userData.next(res);
+            this.profileService.profile.next({ email, password });
+            this.router.navigate(['dashboard']);
           },
           error: (error: HttpErrorResponse) => {
             const { message } = error.error.error;
             this.createSnackbar(message, true);
           },
         });
-
-        this.panelForm.reset();
-        return;
-      }
-
-      this.authService.signin({ email, password }).subscribe({
-        next: (res) => {
-          this.authService.logged.next(res.registered);
-          this.router.navigate(['dashboard']);
-        },
-        error: (error: HttpErrorResponse) => {
-          const { message } = error.error.error;
-          this.createSnackbar(message, true);
-          this.profileService.profileData.next({ email, password });
-        },
-      });
       this.panelForm.reset();
     }
   }
@@ -104,6 +109,7 @@ export class LoginComponent implements OnInit {
   }
 
   ngOnDestroy() {
+    this.subscription.unsubscribe();
     clearTimeout(this.timer);
   }
 }

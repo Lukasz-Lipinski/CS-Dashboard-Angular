@@ -23,9 +23,9 @@ export class DashboardGuard implements CanActivate {
     | Promise<boolean | UrlTree> {
     let isLogged!: boolean;
 
-    this.authService.logged.subscribe({
-      next: (status) => {
-        isLogged = status;
+    this.authService.userData.subscribe({
+      next: (response) => {
+        isLogged = response.registered;
       },
     });
 
