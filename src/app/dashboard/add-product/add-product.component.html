@@ -1,1 +1,40 @@
-<p>add-product works!</p>
+<form
+  [formGroup]="addProductForm"
+  (submit)="submit()"
+  class="grid grid-cols-1 border-2 shadow-md p-8 gap-4 text-lg"
+>
+  <label *ngFor="let label of labels" class="flex justify-between">
+    <span class="pr-3">{{ label.text | uppercase }}</span>
+    <input
+      class="w-full border-2 rounded-lg"
+      [type]="label.inputType"
+      [name]="label.text"
+      [formControlName]="label.text"
+    />
+  </label>
+
+  <div class="flex flex-col">
+    <label
+      [for]="category.name"
+      *ngFor="let category of categories; let i = index"
+    >
+      <span>{{ category.name }}</span>
+      <input
+        type="radio"
+        [id]="category.name"
+        formControlName="category"
+        [value]="category.name"
+        (click)="setSubcategory(i)"
+      />
+    </label>
+    <select class="">
+      <option *ngFor="let subcat of subcategory" [value]="subcat">
+        {{ subcat }}
+      </option>
+    </select>
+  </div>
+
+  <button type="submit" [disabled]="!addProductForm.valid">Add</button>
+</form>
+
+<ng-template appSnackbar></ng-template>

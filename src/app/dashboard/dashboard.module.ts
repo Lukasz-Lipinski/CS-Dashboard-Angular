@@ -10,6 +10,8 @@ import { SidebarComponent } from '../sidebar/sidebar.component';
 import { ProfileModule } from './profile/profile.module';
 import { HomeComponent } from './home/home.component';
 import { TileComponent } from './home/tile/tile.component';
+import { AddProductModule } from './add-product/add-product.module';
+import { SnackbarDirective } from '../snackbar/snackbar.directive';
 
 @NgModule({
   declarations: [
@@ -20,7 +22,7 @@ import { TileComponent } from './home/tile/tile.component';
     TileComponent,
   ],
   exports: [AppRoutingModule],
-  imports: [CommonModule, AppRoutingModule, ProfileModule],
+  imports: [CommonModule, AppRoutingModule, ProfileModule, AddProductModule],
   providers: [DashboardGuard],
 })
 export class DashboardModule {}

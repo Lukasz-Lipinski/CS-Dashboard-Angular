@@ -4,6 +4,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppComponent } from './app.component';
 import { DashboardModule } from './dashboard/dashboard.module';
 import { LoginModule } from './login/login.module';
+import { SnackbarDirective } from './snackbar/snackbar.directive';
 
 @NgModule({
   declarations: [AppComponent],
