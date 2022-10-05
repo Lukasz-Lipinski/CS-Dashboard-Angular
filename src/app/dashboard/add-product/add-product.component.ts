@@ -1,14 +1,25 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { SnackbarComponent } from 'src/app/snackbar/snackbar.component';
+import { SnackbarDirective } from 'src/app/snackbar/snackbar.directive';
 
 interface Label {
   text: string;
   inputType: string;
+  inputName: string;
 }
 
 interface Category {
   name: string;
   subcategories: Array<string>;
+}
+
+export interface Product {
+  product: string;
+  price: number;
+  category: string;
+  subcategory: string;
+  description: string;
 }
 
 @Component({
@@ -17,12 +28,12 @@ interface Category {
   styleUrls: ['./add-product.component.css'],
 })
 export class AddProductComponent implements OnInit {
+  @ViewChild(SnackbarDirective) snackbarContainer!: SnackbarDirective;
   addProductForm!: FormGroup;
   labels: Label[] = [
-    { text: 'name', inputType: 'text' },
-    { text: 'price', inputType: 'number' },
+    { text: 'produkt', inputType: 'text', inputName: 'product' },
+    { text: 'cena', inputType: 'number', inputName: 'price' },
   ];
-
   categories: Category[] = [
     {
       name: 'AGD',
@@ -56,7 +67,6 @@ export class AddProductComponent implements OnInit {
       subcategories: ['Apple', 'Samsung', 'Nokia', 'Motorola', 'Lenovo'],
     },
   ];
-
   subcategory: string[] = this.categories[0].subcategories;
 
   constructor(private builder: FormBuilder) {}
@@ -67,11 +77,12 @@ export class AddProductComponent implements OnInit {
 
   ngOnInit(): void {
     this.addProductForm = this.builder.group({
-      name: this.builder.control('', [Validators.required]),
+      product: this.builder.control('', [Validators.required]),
       price: this.builder.control(0, [Validators.min(0), Validators.required]),
       category: this.builder.control(this.categories[0].name, [
         Validators.required,
       ]),
+      subcategory: this.builder.control('', [Validators.required]),
       description: this.builder.control('', [
         Validators.required,
         Validators.maxLength(300),
@@ -80,6 +91,31 @@ export class AddProductComponent implements OnInit {
   }
 
   submit() {
-    console.log(this.addProductForm);
+    if (this.addProductForm.valid) {
+      const { product, price, category, subcategory, description } =
+        this.addProductForm.controls;
+
+      const newProduct: Product = {
+        product: product.value,
+        price: price.value,
+        category: category.value,
+        subcategory: subcategory.value,
+        description: description.value,
+      };
+
+      console.log(newProduct);
+    }
   }
+
+  createSnackbar(message: string, error: boolean) {
+    const viewContainerRef = this.snackbarContainer.viewContainerRef;
+    const snackbar = viewContainerRef.createComponent(SnackbarComponent);
+
+    viewContainerRef.clear();
+
+    snackbar.instance.isError = error;
+    snackbar.instance.message = message;
+  }
+
+  ngOnDestroy() {}
 }
