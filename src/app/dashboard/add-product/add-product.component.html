@@ -1,20 +1,23 @@
 <form
   [formGroup]="addProductForm"
-  (submit)="submit()"
-  class="grid grid-cols-1 border-2 shadow-md p-8 gap-4 text-lg"
+  (ngSubmit)="submit()"
+  class="grid grid-cols-1 border-2 rounded-md shadow-lg py-10 px-8 gap-4 text-lg bg-yellow-100 border-yellow-300 min-w-[450px]"
 >
-  <label *ngFor="let label of labels" class="flex justify-between">
+  <label *ngFor="let label of labels" class="flex justify-between items-center">
     <span class="pr-3">{{ label.text | uppercase }}</span>
     <input
-      class="w-full border-2 rounded-lg"
+      class="w-full border-2 rounded-lg p-1"
       [type]="label.inputType"
       [name]="label.text"
       [formControlName]="label.text"
     />
   </label>
 
-  <div class="flex flex-col">
+  <div
+    class="grid grid-cols-2 gap-4 justify-center items-center p-4 border-[1px] border-yellow-300"
+  >
     <label
+      class="flex justify-between"
       [for]="category.name"
       *ngFor="let category of categories; let i = index"
     >
@@ -27,14 +30,31 @@
         (click)="setSubcategory(i)"
       />
     </label>
-    <select class="">
+    <select class="col-span-2">
       <option *ngFor="let subcat of subcategory" [value]="subcat">
         {{ subcat }}
       </option>
     </select>
   </div>
 
-  <button type="submit" [disabled]="!addProductForm.valid">Add</button>
+  <textarea
+    rows="5"
+    placeholder="Opis produktu"
+    formControlName="description"
+  ></textarea>
+
+  <button
+    class="mt-8 py-3 cursor-pointer rounded"
+    [ngClass]="
+      addProductForm.valid
+        ? 'text-green-500 hover:bg-green-200 hover:text-green-400 transition-colors ease-linear delay-75'
+        : ' text-red-500 cursor-not-allowed'
+    "
+    type="submit"
+    [disabled]="!addProductForm.valid"
+  >
+    Add
+  </button>
 </form>
 
 <ng-template appSnackbar></ng-template>

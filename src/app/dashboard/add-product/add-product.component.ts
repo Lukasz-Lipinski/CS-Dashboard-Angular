@@ -80,6 +80,6 @@ export class AddProductComponent implements OnInit {
   }
 
   submit() {
-    console.log(this.addProductForm.value);
+    console.log(this.addProductForm);
   }
 }
