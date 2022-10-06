@@ -2,6 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { SnackbarComponent } from 'src/app/snackbar/snackbar.component';
 import { SnackbarDirective } from 'src/app/snackbar/snackbar.directive';
+import { AddProductService } from './add-product.service';
 
 interface Label {
   text: string;
@@ -69,10 +70,14 @@ export class AddProductComponent implements OnInit {
   ];
   subcategory: string[] = this.categories[0].subcategories;
 
-  constructor(private builder: FormBuilder) {}
+  constructor(
+    private builder: FormBuilder,
+    private addProductService: AddProductService
+  ) {}
 
   setSubcategory(i: number) {
     this.subcategory = this.categories[i].subcategories;
+    this.addProductForm.controls['subcategory'].setValue(this.subcategory[0]);
   }
 
   ngOnInit(): void {
@@ -82,7 +87,9 @@ export class AddProductComponent implements OnInit {
       category: this.builder.control(this.categories[0].name, [
         Validators.required,
       ]),
-      subcategory: this.builder.control('', [Validators.required]),
+      subcategory: this.builder.control(this.subcategory[0], [
+        Validators.required,
+      ]),
       description: this.builder.control('', [
         Validators.required,
         Validators.maxLength(300),
@@ -103,7 +110,14 @@ export class AddProductComponent implements OnInit {
         description: description.value,
       };
 
-      console.log(newProduct);
+      this.addProductService.addProduct(newProduct).subscribe({
+        next: (msg) => {
+          console.log(msg);
+        },
+        error: (error) => {
+          console.log(error);
+        },
+      });
     }
   }
 

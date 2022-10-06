@@ -43,18 +43,20 @@
     formControlName="description"
   ></textarea>
 
-  <button
-    class="mt-8 py-3 cursor-pointer rounded"
-    [ngClass]="
-      addProductForm.valid
-        ? 'text-green-500 hover:bg-green-200 hover:text-green-400 transition-colors ease-linear delay-75'
-        : ' text-red-500 cursor-not-allowed'
-    "
-    type="submit"
-    [disabled]="!addProductForm.valid"
-  >
-    Add
-  </button>
+  <div class="flex justify-center">
+    <button
+      class="mt-8 py-3 px-6 cursor-pointer rounded"
+      [ngClass]="
+        addProductForm.valid
+          ? 'text-green-500 hover:bg-green-200 hover:text-green-400 transition-colors ease-linear delay-75'
+          : ' text-red-500 cursor-not-allowed'
+      "
+      type="submit"
+      [disabled]="!addProductForm.valid"
+    >
+      Add
+    </button>
+  </div>
 </form>
 
 <ng-template appSnackbar></ng-template>
