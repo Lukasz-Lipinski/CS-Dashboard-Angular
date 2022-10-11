@@ -1,0 +1,18 @@
+<li
+  class="grid grid-cols-7 items-center"
+  [ngClass]="isHeader ? 'font-bold' : 'py-3 px-2 shadow'"
+>
+  <p class="col-span-3">
+    {{ product }}
+  </p>
+  <p>{{ price }}</p>
+  <p>{{ category }}</p>
+  <p>{{ subcategory }}</p>
+
+  <button
+    *ngIf="!isHeader"
+    class="justify-self-end px-3 py-1 mr-2 border-2 rounded bg-red-600 text-white font-bold"
+  >
+    &minus;
+  </button>
+</li>

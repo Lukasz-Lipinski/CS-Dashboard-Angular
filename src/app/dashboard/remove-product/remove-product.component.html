@@ -1,10 +1,28 @@
-<label class="flex items-center w-full">
-  <input type="text" [(ngModel)]="searcher" />
-  <span class="material-icons">search</span>
-</label>
+<section class="flex justify-center">
+  <div class="w-3/4 p-4 grid grid-cols-1 gap-4">
+    <label class="flex items-center gap-2">
+      <input type="text" [(ngModel)]="searcher" class="w-full p-1 rounded" />
+      <span class="material-icons">search</span>
+    </label>
 
-<hr />
+    <hr />
 
-<div>
-  <h2>Results for {{ searcher }}</h2>
-</div>
+    <h2>Results for {{ searcher }}</h2>
+    <ul>
+      <app-product
+        [isHeader]="true"
+        product="Nazwa"
+        category="Kategoria"
+        subcategory="Podkategoria"
+        price="Cena"
+      ></app-product>
+      <app-product
+        *ngFor="let product of allProducts"
+        [product]="product.product"
+        [category]="product.category"
+        [subcategory]="product.subcategory"
+        [price]="product.price"
+      ></app-product>
+    </ul>
+  </div>
+</section>
