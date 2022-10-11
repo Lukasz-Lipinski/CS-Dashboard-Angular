@@ -1,6 +1,9 @@
-<div class="fixed flex justify-center bottom-2 w-full" *ngIf="message">
+<div
+  class="fixed z-100 bottom-1 left-0 flex justify-center w-full items-center"
+  *ngIf="message"
+>
   <p
-    class="border-2 p-4 flex justify-center items-center w-fit text-lg rounded-md shadow"
+    class="border-2 p-4 text-lg rounded-md shadow"
     [ngClass]="
       isError
         ? 'bg-red-400 border-red-600 text-red-600'

@@ -6,15 +6,15 @@ import { BrowserModule } from '@angular/platform-browser';
 import { LoginComponent } from './login.component';
 import { Upperletter } from './upperletter.pipe';
 import { SnackbarComponent } from '../snackbar/snackbar.component';
-import { SnackbarDirective } from '../snackbar/snackbar.directive';
+import { SnackbarModule } from '../snackbar/snackbar.module';
 
 @NgModule({
-  declarations: [
-    LoginComponent,
-    Upperletter,
-    SnackbarComponent,
-    SnackbarDirective,
+  declarations: [LoginComponent, Upperletter],
+  imports: [
+    BrowserModule,
+    ReactiveFormsModule,
+    HttpClientModule,
+    SnackbarModule,
   ],
-  imports: [BrowserModule, ReactiveFormsModule, HttpClientModule],
 })
 export class LoginModule {}

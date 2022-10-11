@@ -2,13 +2,13 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 
-interface Request {
+interface Req {
   email: string;
   password: string;
   returnSecureToken: boolean;
 }
 
-export interface Response {
+export interface Res {
   idToken: string;
   email: string;
   refreshToken: string;
@@ -21,7 +21,7 @@ export interface Response {
   providedIn: 'root',
 })
 export class AuthService {
-  userData = new BehaviorSubject<Response>({
+  userData = new BehaviorSubject<Res>({
     email: '',
     ExpiresIn: '',
     idToken: '',
@@ -37,25 +37,25 @@ export class AuthService {
 
   constructor(private http: HttpClient) {}
 
-  signin(data: { email: string; password: string }): Observable<Response> {
-    const body: Request = {
+  signin(data: { email: string; password: string }): Observable<Res> {
+    const body: Req = {
       ...data,
       returnSecureToken: true,
     };
 
-    return this.http.post<Response>(this.signinURL, body);
+    return this.http.post<Res>(this.signinURL, body);
   }
 
-  register(data: { email: string; password: string }): Observable<Response> {
-    const body: Request = {
+  register(data: { email: string; password: string }): Observable<Res> {
+    const body: Req = {
       ...data,
       returnSecureToken: true,
     };
 
-    return this.http.post<Response>(this.registerURL, body);
+    return this.http.post<Res>(this.registerURL, body);
   }
 
-  signout(userData: Response) {
+  signout(userData: Res) {
     this.userData.next({
       ...userData,
       registered: false,

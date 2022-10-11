@@ -29,7 +29,8 @@ export interface Product {
   styleUrls: ['./add-product.component.css'],
 })
 export class AddProductComponent implements OnInit {
-  @ViewChild(SnackbarDirective) snackbarContainer!: SnackbarDirective;
+  @ViewChild(SnackbarDirective, { static: true })
+  snackbarContainer!: SnackbarDirective;
   addProductForm!: FormGroup;
   labels: Label[] = [
     { text: 'produkt', inputType: 'text', inputName: 'product' },
@@ -112,23 +113,30 @@ export class AddProductComponent implements OnInit {
 
       this.addProductService.addProduct(newProduct).subscribe({
         next: (msg) => {
-          console.log(msg);
+          this.createSnackbar(msg);
         },
         error: (error) => {
-          console.log(error);
+          this.createSnackbar(error);
         },
       });
     }
   }
 
-  createSnackbar(message: string, error: boolean) {
+  createSnackbar({ msg, isError }: { msg: string; isError: boolean }) {
     const viewContainerRef = this.snackbarContainer.viewContainerRef;
-    const snackbar = viewContainerRef.createComponent(SnackbarComponent);
-
     viewContainerRef.clear();
 
-    snackbar.instance.isError = error;
-    snackbar.instance.message = message;
+    const snackbar = viewContainerRef.createComponent(SnackbarComponent);
+
+    snackbar.instance.isError = isError;
+    snackbar.instance.message = msg;
+  }
+
+  create() {
+    this.createSnackbar({
+      isError: true,
+      msg: 'asdf',
+    });
   }
 
   ngOnDestroy() {}

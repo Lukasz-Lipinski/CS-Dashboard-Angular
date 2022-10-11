@@ -8,8 +8,16 @@ import { Component, Input, OnInit } from '@angular/core';
 export class SnackbarComponent implements OnInit {
   message: string | undefined;
   isError: boolean = false;
-
+  timer: any;
   constructor() {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.timer = setTimeout(() => {
+      this.message = undefined;
+    }, 3000);
+  }
+
+  ngOnDestroy() {
+    clearTimeout(this.timer);
+  }
 }

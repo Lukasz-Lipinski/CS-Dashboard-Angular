@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { AuthService, Response } from '../login/auth.service';
+import { AuthService, Res } from '../login/auth.service';
 import { Link, MenuService } from './menu.service';
 
 @Component({
@@ -22,7 +22,7 @@ export class MenuComponent implements OnInit {
   }
 
   logout() {
-    const profileData: Response = {
+    const profileData: Res = {
       email: '',
       ExpiresIn: '',
       idToken: '',
