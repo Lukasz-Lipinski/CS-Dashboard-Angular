@@ -1,7 +1,7 @@
 <form
   [formGroup]="addProductForm"
   (submit)="submit()"
-  class="grid grid-cols-1 border-2 rounded-md shadow-lg py-10 px-8 gap-4 text-lg bg-yellow-100 border-yellow-300 min-w-[450px]"
+  class="grid grid-cols-1 border-2 rounded-md shadow-lg pt-8 pb-4 px-8 gap-2 text-lg bg-yellow-100 border-yellow-300 min-w-[450px]"
 >
   <label *ngFor="let label of labels" class="flex justify-between items-center">
     <span class="pr-3">{{ label.text | uppercase }}</span>
