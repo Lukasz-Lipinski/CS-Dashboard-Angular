@@ -1,12 +1,12 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { catchError, Observable, tap } from 'rxjs';
+import { catchError, map, Observable, tap } from 'rxjs';
 import { Product } from './add-product.component';
 
 @Injectable({
   providedIn: 'root',
 })
-export class AddProductService {
+export class ProductService {
   url: string = 'http://localhost:3000/products/';
   constructor(private http: HttpClient) {}
 
@@ -28,5 +28,13 @@ export class AddProductService {
           };
         })
       );
+  }
+
+  getAllProducts(): Observable<Array<Product>> {
+    return this.http.get<{ products: Array<Product> }>(this.url).pipe(
+      map((val) => {
+        return val.products;
+      })
+    );
   }
 }

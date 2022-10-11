@@ -1,3 +1,10 @@
-<p>
-  remove-product works!
-</p>
+<label class="flex items-center">
+  <input type="text" [(ngModel)]="searcher" />
+  <span class="material-icons">search</span>
+</label>
+
+<hr />
+
+<div class="">
+  <h2>Results for {{ searcher }}</h2>
+</div>

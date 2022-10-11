@@ -11,7 +11,8 @@ import { ProfileModule } from './profile/profile.module';
 import { HomeComponent } from './home/home.component';
 import { TileComponent } from './home/tile/tile.component';
 import { AddProductModule } from './add-product/add-product.module';
-import { SnackbarDirective } from '../snackbar/snackbar.directive';
+import { RemoveProductModule } from './remove-product/remove-product.module';
+import { UpdateProductModule } from './update-product/update-product.module';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,14 @@ import { SnackbarDirective } from '../snackbar/snackbar.directive';
     TileComponent,
   ],
   exports: [AppRoutingModule],
-  imports: [CommonModule, AppRoutingModule, ProfileModule, AddProductModule],
+  imports: [
+    CommonModule,
+    AppRoutingModule,
+    ProfileModule,
+    AddProductModule,
+    RemoveProductModule,
+    UpdateProductModule,
+  ],
   providers: [DashboardGuard],
 })
 export class DashboardModule {}

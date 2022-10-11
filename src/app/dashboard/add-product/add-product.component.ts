@@ -2,7 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { SnackbarComponent } from 'src/app/snackbar/snackbar.component';
 import { SnackbarDirective } from 'src/app/snackbar/snackbar.directive';
-import { AddProductService } from './add-product.service';
+import { ProductService } from './product.service';
 
 interface Label {
   text: string;
@@ -10,7 +10,7 @@ interface Label {
   inputName: string;
 }
 
-interface Category {
+export interface Category {
   name: string;
   subcategories: Array<string>;
 }
@@ -73,7 +73,7 @@ export class AddProductComponent implements OnInit {
 
   constructor(
     private builder: FormBuilder,
-    private addProductService: AddProductService
+    private addProductService: ProductService
   ) {}
 
   setSubcategory(i: number) {
@@ -130,13 +130,6 @@ export class AddProductComponent implements OnInit {
 
     snackbar.instance.isError = isError;
     snackbar.instance.message = msg;
-  }
-
-  create() {
-    this.createSnackbar({
-      isError: true,
-      msg: 'asdf',
-    });
   }
 
   ngOnDestroy() {}
