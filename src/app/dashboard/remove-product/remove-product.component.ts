@@ -60,5 +60,7 @@ export class RemoveProductComponent implements OnInit {
         console.log(info);
       },
     });
+
+    this.allProducts = this.allProducts.filter((item) => item.product !== product);
   }
 }
