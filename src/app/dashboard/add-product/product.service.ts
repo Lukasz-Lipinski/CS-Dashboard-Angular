@@ -37,4 +37,9 @@ export class ProductService {
       })
     );
   }
+
+  removeProduct(product: string): Observable<string> {
+    const newURL = `${this.url}remove/${product}`;
+    return this.http.get<string>(newURL);
+  }
 }

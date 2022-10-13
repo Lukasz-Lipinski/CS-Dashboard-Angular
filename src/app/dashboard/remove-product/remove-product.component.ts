@@ -53,4 +53,12 @@ export class RemoveProductComponent implements OnInit {
       },
     });
   }
+
+  removeItem(product: string) {
+    this.productService.removeProduct(product).subscribe({
+      next: (info) => {
+        console.log(info);
+      },
+    });
+  }
 }

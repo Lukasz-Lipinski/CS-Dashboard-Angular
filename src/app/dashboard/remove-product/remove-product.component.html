@@ -18,6 +18,7 @@
       ></app-product>
       <app-product
         *ngFor="let product of allProducts"
+        (removeEmitter)="removeItem($event)"
         [product]="product.product"
         [category]="product.category"
         [subcategory]="product.subcategory"
