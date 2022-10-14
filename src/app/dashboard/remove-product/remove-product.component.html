@@ -14,8 +14,10 @@
         product="Nazwa"
         category="Kategoria"
         subcategory="Podkategoria"
-        price="Cena"
+        price="Cena [zł]"
       ></app-product>
+      <hr class="my-3" />
+
       <app-product
         *ngFor="let product of getFoundProducts"
         (removeEmitter)="removeItem($event)"

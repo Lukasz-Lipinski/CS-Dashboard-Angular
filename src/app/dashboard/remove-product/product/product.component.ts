@@ -1,5 +1,4 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { ProductService } from '../../add-product/product.service';
+import { Component, OnInit, Input, Output, EventEmitter, OnChanges } from '@angular/core';
 
 @Component({
   selector: 'app-product',
@@ -14,7 +13,7 @@ export class ProductComponent implements OnInit {
   @Input() isHeader: boolean = false;
   @Output() removeEmitter = new EventEmitter<string>();
 
-  constructor(private productService: ProductService) {}
+  constructor() {}
 
   ngOnInit(): void {}
 
@@ -22,11 +21,4 @@ export class ProductComponent implements OnInit {
     this.removeEmitter.emit(this.product);
   }
 
-  // deleteItem() {
-  //   this.productService.removeProduct(this.product).subscribe({
-  //     next: (info) => {
-  //       console.log(info);
-  //     },
-  //   });
-  // }
 }
