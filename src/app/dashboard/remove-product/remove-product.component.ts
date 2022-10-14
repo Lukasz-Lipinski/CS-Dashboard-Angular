@@ -44,6 +44,16 @@ export class RemoveProductComponent implements OnInit {
   ];
   allProducts!: Product[];
 
+  get getFoundProducts() {
+    if (this.searcher) {
+      return this.allProducts.filter((el) =>
+        el.product.toLowerCase().includes(this.searcher.toLowerCase())
+      );
+    } else {
+      return this.allProducts;
+    }
+  }
+
   constructor(private productService: ProductService) {}
 
   ngOnInit() {

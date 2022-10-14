@@ -17,7 +17,7 @@
         price="Cena"
       ></app-product>
       <app-product
-        *ngFor="let product of allProducts"
+        *ngFor="let product of getFoundProducts"
         (removeEmitter)="removeItem($event)"
         [product]="product.product"
         [category]="product.category"
