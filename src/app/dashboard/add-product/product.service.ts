@@ -38,8 +38,8 @@ export class ProductService {
     );
   }
 
-  removeProduct(product: string): Observable<string> {
-    const newURL = `${this.url}remove/${product}`;
-    return this.http.get<string>(newURL);
+  removeProduct(product: Product): Observable<string> {
+    const newURL = `${this.url}remove/${product.model}`;
+    return this.http.delete<string>(newURL);
   }
 }

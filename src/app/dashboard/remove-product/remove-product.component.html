@@ -11,7 +11,7 @@
     <ul>
       <app-product
         [isHeader]="true"
-        product="Nazwa"
+        brand="Nazwa"
         category="Kategoria"
         subcategory="Podkategoria"
         price="Cena [zł]"
@@ -21,7 +21,9 @@
       <app-product
         *ngFor="let product of getFoundProducts"
         (removeEmitter)="removeItem($event)"
-        [product]="product.product"
+        [brand]="product.brand"
+        [model]="product.model"
+        [description]="product.description"
         [category]="product.category"
         [subcategory]="product.subcategory"
         [price]="product.price"

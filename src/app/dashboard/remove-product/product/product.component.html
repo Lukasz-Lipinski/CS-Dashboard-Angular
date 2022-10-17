@@ -7,17 +7,27 @@
   "
 >
   <p class="col-span-3">
-    {{ product }}
+    {{ brand | uppercase }}
+    {{ model }}
   </p>
   <p>{{ price }}</p>
   <p>{{ category }}</p>
   <p>{{ subcategory }}</p>
 
-  <button
-    (click)="remove()"
-    *ngIf="!isHeader"
-    class="justify-self-end px-3 py-1 mr-2 border-2 rounded bg-red-500 text-white font-bold hover:bg-red-300"
-  >
-    &minus;
-  </button>
+  <div class="justify-self-end">
+    <button
+      (click)="remove()"
+      *ngIf="!isHeader"
+      class="px-3 py-1 mr-2 border-2 rounded bg-red-500 text-white font-bold hover:bg-red-300"
+    >
+      &minus;
+    </button>
+    <button
+      *ngIf="!isHeader"
+      (click)="update()"
+      class="text-white px-3 py-1 bg-yellow-300"
+    >
+      modyfikuj
+    </button>
+  </div>
 </li>

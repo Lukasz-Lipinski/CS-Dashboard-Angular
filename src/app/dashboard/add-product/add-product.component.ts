@@ -16,7 +16,8 @@ export interface Category {
 }
 
 export interface Product {
-  product: string;
+  brand: string;
+  model: string;
   price: number;
   category: string;
   subcategory: string;
@@ -33,7 +34,8 @@ export class AddProductComponent implements OnInit {
   snackbarContainer!: SnackbarDirective;
   addProductForm!: FormGroup;
   labels: Label[] = [
-    { text: 'produkt', inputType: 'text', inputName: 'product' },
+    { text: 'marka', inputType: 'text', inputName: 'brand' },
+    { text: 'model', inputType: 'text', inputName: 'model' },
     { text: 'cena', inputType: 'number', inputName: 'price' },
   ];
   categories: Category[] = [
@@ -83,7 +85,8 @@ export class AddProductComponent implements OnInit {
 
   ngOnInit(): void {
     this.addProductForm = this.builder.group({
-      product: this.builder.control('', [Validators.required]),
+      brand: this.builder.control('', [Validators.required]),
+      model: this.builder.control('', [Validators.required]),
       price: this.builder.control(0, [Validators.min(0), Validators.required]),
       category: this.builder.control(this.categories[0].name, [
         Validators.required,
@@ -100,11 +103,12 @@ export class AddProductComponent implements OnInit {
 
   submit() {
     if (this.addProductForm.valid) {
-      const { product, price, category, subcategory, description } =
+      const { brand, model, price, category, subcategory, description } =
         this.addProductForm.controls;
 
       const newProduct: Product = {
-        product: product.value,
+        brand: brand.value,
+        model: model.value,
         price: price.value,
         category: category.value,
         subcategory: subcategory.value,

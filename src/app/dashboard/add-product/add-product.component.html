@@ -2,15 +2,18 @@
   <form
     [formGroup]="addProductForm"
     (submit)="submit()"
-    class="grid grid-cols-1 border-2 rounded-md shadow-lg pt-8 pb-4 px-8 gap-2 text-lg bg-yellow-100 border-yellow-300 min-w-[450px]"
+    class="grid grid-cols-1 border-2 rounded-md shadow-lg pt-8 pb-4 px-8 gap-2 text-lg bg-yellow-100 border-yellow-300 min-w-[500px]"
   >
     <label
       *ngFor="let label of labels"
       class="flex justify-between items-center"
     >
-      <span class="pr-3">{{ label.text | uppercase }}</span>
+      <span class="pr-3"
+        >{{ label.text | uppercase }}
+        {{ (label.text === "cena" ? "[pln]" : "") | uppercase }}</span
+      >
       <input
-        class="w-9/12 border-2 rounded-lg p-1"
+        class="w-9/12 border-2 rounded-lg px-2 py-1 text-base"
         [type]="label.inputType"
         [name]="label.text"
         [formControlName]="label.inputName"

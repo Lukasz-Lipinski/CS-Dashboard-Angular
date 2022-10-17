@@ -46,9 +46,10 @@ export class RemoveProductComponent implements OnInit {
 
   get getFoundProducts() {
     if (this.searcher) {
-      return this.allProducts.filter((el) =>
-        el.product.toLowerCase().includes(this.searcher.toLowerCase())
-      );
+      return this.allProducts.filter((el) => {
+        let composedName = this.compseLabel(el);
+        return composedName.includes(this.searcher.toLowerCase()) && el;
+      });
     } else {
       return this.allProducts;
     }
@@ -64,13 +65,19 @@ export class RemoveProductComponent implements OnInit {
     });
   }
 
-  removeItem(product: string) {
+  removeItem(product: Product) {
     this.productService.removeProduct(product).subscribe({
       next: (info) => {
         console.log(info);
       },
     });
 
-    this.allProducts = this.allProducts.filter((item) => item.product !== product);
+    this.allProducts = this.allProducts.filter(
+      (item) => item.model !== product.model
+    );
+  }
+
+  compseLabel(product: Product): string {
+    return `${product.brand} ${product.model}`.toLowerCase();
   }
 }
