@@ -1,5 +1,38 @@
-<section *ngIf="product">
-  <app-card>
-    <p>{{ product.price }}</p>
-  </app-card>
+<section *ngIf="product" class="flex justify-center">
+  <form [formGroup]="form">
+    <div>
+      <label>
+        <span> Firma: </span>
+        <input type="text" formControlName="brand" />
+      </label>
+      <label>
+        <span> Model: </span>
+        <input type="text" formControlName="model" />
+      </label>
+    </div>
+    <div class="grid grid-cols-2 justify-center gap-2">
+      <label *ngFor="let cat of categories; let i = index" class="flex">
+        <input
+          (click)="setSubcategories(i)"
+          type="radio"
+          name="category"
+          formGroupName="category"
+          [value]="cat.name"
+          [checked]="cat.name === product.category"
+        />
+        <p class="pl-2">{{ cat.name }}</p>
+      </label>
+    </div>
+    <div>
+      <select name="" id="">
+        <option
+          *ngFor="let sub of getSubcategories"
+          [value]="sub"
+          [selected]="sub === product.subcategory"
+        >
+          {{ sub }}
+        </option>
+      </select>
+    </div>
+  </form>
 </section>

@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Data } from '@angular/router';
+import { map } from 'rxjs';
 import { Category, Product } from '../add-product/add-product.component';
 import { ProductService } from '../add-product/product.service';
 
@@ -55,14 +57,24 @@ export class RemoveProductComponent implements OnInit {
     }
   }
 
-  constructor(private productService: ProductService) {}
+  constructor(
+    private productService: ProductService,
+    private activatedRoute: ActivatedRoute
+  ) {}
 
   ngOnInit() {
-    this.productService.getAllProducts().subscribe({
-      next: (data) => {
-        this.allProducts = data;
-      },
-    });
+    this.activatedRoute.data
+      .pipe(
+        map((data) => {
+          const { products } = data;
+          return products;
+        })
+      )
+      .subscribe({
+        next: (data) => {
+          this.allProducts = data;
+        },
+      });
   }
 
   removeItem(product: Product) {
