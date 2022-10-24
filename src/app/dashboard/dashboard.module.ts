@@ -13,6 +13,7 @@ import { TileComponent } from './home/tile/tile.component';
 import { AddProductModule } from './add-product/add-product.module';
 import { RemoveProductModule } from './remove-product/remove-product.module';
 import { UpdateProductModule } from './update-product/update-product.module';
+import { UpdateProductGuard } from './update-product/update-product.guard';
 
 @NgModule({
   declarations: [
@@ -31,6 +32,6 @@ import { UpdateProductModule } from './update-product/update-product.module';
     RemoveProductModule,
     UpdateProductModule,
   ],
-  providers: [DashboardGuard],
+  providers: [DashboardGuard, UpdateProductGuard],
 })
 export class DashboardModule {}

@@ -10,6 +10,7 @@ import { ProfileComponent } from './dashboard/profile/profile.component';
 import { RemoveProductComponent } from './dashboard/remove-product/remove-product.component';
 import { UpdateProductComponent } from './dashboard/update-product/update-product.component';
 import { HomeComponent } from './dashboard/home/home.component';
+import { UpdateProductGuard } from './dashboard/update-product/update-product.guard';
 
 const routes: Routes = [
   { path: '', component: LoginComponent },
@@ -22,7 +23,11 @@ const routes: Routes = [
       { path: 'profile', component: ProfileComponent },
       { path: 'add', component: AddProductComponent },
       { path: 'remove', component: RemoveProductComponent },
-      { path: 'update', component: UpdateProductComponent },
+      {
+        path: 'update',
+        component: UpdateProductComponent,
+        canActivate: [UpdateProductGuard],
+      },
     ],
   },
   {

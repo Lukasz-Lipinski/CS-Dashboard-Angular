@@ -17,7 +17,6 @@ export class MenuService {
   sideMenuLinks: Link[] = [
     { label: 'Dodaj produkt', href: 'add', icon: 'library_add' },
     { label: 'Usuń produkt', href: 'remove', icon: 'delete_forever' },
-    { label: 'Aktualizuj', href: 'update', icon: 'file_upload' },
   ];
 
   constructor() {}

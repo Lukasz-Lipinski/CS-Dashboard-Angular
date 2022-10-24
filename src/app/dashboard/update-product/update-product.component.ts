@@ -13,7 +13,7 @@ export class UpdateProductComponent implements OnInit {
 
   constructor(
     private activatedRoute: ActivatedRoute,
-    private productService: ProductService
+    private productService: ProductService,
   ) {}
 
   ngOnInit() {
