@@ -1,13 +1,16 @@
 <section *ngIf="product" class="flex justify-center">
-  <form [formGroup]="form">
-    <div>
+  <form
+    [formGroup]="form"
+    class="flex flex-col gap-6 px-8 py-10 border-2 border-yellow-400 shadow-lg bg-yellow-100"
+  >
+    <div class="flex justify-between gap-5">
       <label>
-        <span> Firma: </span>
-        <input type="text" formControlName="brand" />
+        <span class="pr-1"> Firma: </span>
+        <input type="text" formControlName="brand" class="py-1 px-2" />
       </label>
       <label>
-        <span> Model: </span>
-        <input type="text" formControlName="model" />
+        <span class="pr-1"> Model: </span>
+        <input type="text" formControlName="model" class="py-1 px-2" />
       </label>
     </div>
     <div class="grid grid-cols-2 justify-center gap-2">
@@ -23,8 +26,8 @@
         <p class="pl-2">{{ cat.name }}</p>
       </label>
     </div>
-    <div>
-      <select name="" id="">
+    <div class="flex justify-center">
+      <select class="py-1 px-3 text-center">
         <option
           *ngFor="let sub of getSubcategories"
           [value]="sub"
@@ -33,6 +36,20 @@
           {{ sub }}
         </option>
       </select>
+    </div>
+    <div class="flex justify-center pt-8">
+      <button
+        type="submit"
+        [disabled]="form.invalid"
+        class="mt-8 py-3 px-6 cursor-pointer rounded"
+        [ngClass]="
+          form.valid
+            ? 'text-green-500 hover:bg-green-200 hover:text-green-400 transition-colors ease-linear delay-75'
+            : ' text-red-500 cursor-not-allowed'
+        "
+      >
+        Update
+      </button>
     </div>
   </form>
 </section>
