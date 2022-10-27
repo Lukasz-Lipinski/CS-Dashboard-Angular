@@ -6,8 +6,7 @@ import {
   EventEmitter,
   OnChanges,
 } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
-import { Observable } from 'rxjs';
+import { Router } from '@angular/router';
 import { Product } from '../../add-product/add-product.component';
 
 @Component({
@@ -20,7 +19,7 @@ export class ProductComponent implements OnInit {
   @Input() isHeader: boolean = false;
   @Output() removeEmitter = new EventEmitter<Product>();
 
-  constructor(private router: Router, private activatedRoute: ActivatedRoute) {}
+  constructor(private router: Router) {}
 
   ngOnInit(): void {}
 

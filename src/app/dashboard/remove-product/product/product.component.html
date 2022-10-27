@@ -12,6 +12,7 @@
 
   <div class="justify-self-end">
     <button
+      data-testid="removeBtn"
       (click)="remove()"
       *ngIf="!isHeader"
       class="px-3 py-1 mr-2 border-2 rounded bg-danger-primary text-white font-bold hover:bg-danger-hover active:bg-danger-clicked"
@@ -19,6 +20,7 @@
       &minus;
     </button>
     <button
+      data-testid="updateBtn"
       *ngIf="!isHeader"
       (click)="update()"
       class="px-3 py-1 bg-primary hover:bg-primary-hover"
