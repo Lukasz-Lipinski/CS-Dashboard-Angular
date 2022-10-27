@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Data } from '@angular/router';
-import { map } from 'rxjs';
+import { map, Observable } from 'rxjs';
 import { Category, Product } from '../add-product/add-product.component';
 import { ProductService } from '../add-product/product.service';
 
@@ -45,6 +45,7 @@ export class RemoveProductComponent implements OnInit {
     },
   ];
   allProducts!: Product[];
+  header!: Product;
 
   get getFoundProducts() {
     if (this.searcher) {
@@ -63,6 +64,7 @@ export class RemoveProductComponent implements OnInit {
   ) {}
 
   ngOnInit() {
+    this.header = this.productService.getHeader();
     this.activatedRoute.data
       .pipe(
         map((data) => {

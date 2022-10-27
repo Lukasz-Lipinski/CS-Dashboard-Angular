@@ -8,22 +8,23 @@ export interface Tile {
 }
 
 @Component({
-  selector: 'app-tile',
+  selector: 'app-tile[tile]',
   templateUrl: './tile.component.html',
   styleUrls: ['./tile.component.css'],
 })
-export class TileComponent implements OnInit, Tile {
-  @Input() icon: string = '';
-  @Input() text: string = '';
-  @Input() navigation: string = '';
+export class TileComponent implements OnInit {
+  @Input() tile!: Tile;
 
   constructor(private router: Router, private activatedRoute: ActivatedRoute) {}
 
   ngOnInit(): void {}
 
   navigate() {
-    this.router.navigate([this.navigation], {
-      relativeTo: this.activatedRoute,
-    });
+    if ('navigation' in this.tile) {
+      const { navigation } = this.tile;
+      this.router.navigate([navigation], {
+        relativeTo: this.activatedRoute,
+      });
+    }
   }
 }

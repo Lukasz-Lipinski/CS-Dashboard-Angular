@@ -4,7 +4,7 @@
       <input
         type="text"
         [(ngModel)]="searcher"
-        class="w-full p-1 px-2 rounded border-2 border-yellow-300"
+        class="w-full p-1 px-2 rounded outline outline-1 outline-primary focus:outline-primary-dark focus:outline-2 text-2xl"
       />
       <span class="material-icons">search</span>
     </label>
@@ -13,24 +13,13 @@
 
     <h2>Results for {{ searcher }}</h2>
     <ul>
-      <app-product
-        [isHeader]="true"
-        brand="Nazwa"
-        category="Kategoria"
-        subcategory="Podkategoria"
-        price="Cena [zł]"
-      ></app-product>
+      <app-product [isHeader]="true" [product]="header"></app-product>
       <hr class="my-3" />
 
       <app-product
         *ngFor="let product of getFoundProducts"
         (removeEmitter)="removeItem($event)"
-        [brand]="product.brand"
-        [model]="product.model"
-        [description]="product.description"
-        [category]="product.category"
-        [subcategory]="product.subcategory"
-        [price]="product.price"
+        [product]="product"
       ></app-product>
     </ul>
   </div>

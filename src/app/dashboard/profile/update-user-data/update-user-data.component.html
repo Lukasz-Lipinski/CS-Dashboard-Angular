@@ -1,9 +1,8 @@
 <div
-  class="border-2 flex flex-col p-10 gap-8 bg-gradient-to-tl to-yellow-100 from-slate-100 rounded-lg shadow-lg min-w-[490px]"
+  class="flex flex-col p-10 gap-8 outline outline-3 outline-primary bg-gradient-to-b from-yellow-100 to-primary rounded-lg shadow-lg min-w-[490px]"
 >
-  <h1 class="font-bold pb-6 text-center">
+  <h1 class="font-bold pb-6 text-center border-b-2 border-secondary">
     Change password
-    <hr />
   </h1>
   <label class="text-lg">
     <span>New password: </span>
@@ -37,8 +36,8 @@
       class="border-2 rounded shadow-md p-4"
       [ngClass]="
         (!currentPassword && !newPassword) || currentPassword === newPassword
-          ? 'cursor-not-allowed bg-red-300 text-red-500 border-red-500'
-          : 'cursor-pointer bg-lime-300 text-lime-500 border-lime-500'
+          ? 'cursor-not-allowed bg-danger-primary text-white border-danger-clicked'
+          : 'cursor-pointer bg-accept-primary hover:bg-accept-hover text-accept- border-lime-500 active:bg-accept-primary'
       "
     >
       Change

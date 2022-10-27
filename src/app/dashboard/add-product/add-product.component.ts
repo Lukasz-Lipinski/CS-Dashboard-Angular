@@ -18,7 +18,7 @@ export interface Category {
 export interface Product {
   brand: string;
   model: string;
-  price: number;
+  price: number | string;
   category: string;
   subcategory: string;
   description: string;

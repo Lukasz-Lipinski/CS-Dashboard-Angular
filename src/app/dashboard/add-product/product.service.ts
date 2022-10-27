@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { catchError, map, Observable, tap } from 'rxjs';
+import { catchError, filter, map, Observable, of, tap } from 'rxjs';
 import { Product } from './add-product.component';
 
 @Injectable({
@@ -28,6 +28,17 @@ export class ProductService {
           };
         })
       );
+  }
+
+  getHeader(): Product {
+    return {
+      brand: 'Nazwa',
+      model: '',
+      category: 'Kategoria',
+      subcategory: 'Podkategoria',
+      price: 'Cena [zł]',
+      description: '',
+    };
   }
 
   getAllProducts(): Observable<Array<Product>> {

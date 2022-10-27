@@ -1,16 +1,24 @@
 <section *ngIf="product" class="flex justify-center">
   <form
     [formGroup]="form"
-    class="flex flex-col gap-6 px-8 py-10 border-2 border-yellow-400 shadow-lg bg-yellow-100"
+    class="flex flex-col gap-6 px-8 py-10 bg-gradient-to-b border-2 rounded-lg border-primary-dark from-primary to-primary-dark shadow-lg"
   >
     <div class="flex justify-between gap-5">
       <label>
         <span class="pr-1"> Firma: </span>
-        <input type="text" formControlName="brand" class="py-1 px-2" />
+        <input
+          type="text"
+          formControlName="brand"
+          class="py-1 px-2 outline outline-primary-dark rounded"
+        />
       </label>
       <label>
         <span class="pr-1"> Model: </span>
-        <input type="text" formControlName="model" class="py-1 px-2" />
+        <input
+          type="text"
+          formControlName="model"
+          class="py-1 px-2 outline outline-primary-dark rounded"
+        />
       </label>
     </div>
     <div class="grid grid-cols-2 justify-center gap-2">
@@ -27,7 +35,9 @@
       </label>
     </div>
     <div class="flex justify-center">
-      <select class="py-1 px-3 text-center">
+      <select
+        class="py-1 px-3 text-center outline outline-primary-dark rounded"
+      >
         <option
           *ngFor="let sub of getSubcategories"
           [value]="sub"
@@ -44,7 +54,7 @@
         class="mt-8 py-3 px-6 cursor-pointer rounded"
         [ngClass]="
           form.valid
-            ? 'text-green-500 hover:bg-green-200 hover:text-green-400 transition-colors ease-linear delay-75'
+            ? 'bg-accept-primary border-2 border-lime-500 text-lime-500 hover:bg-accept-hover transition-colors ease-linear delay-75'
             : ' text-red-500 cursor-not-allowed'
         "
       >
@@ -53,3 +63,9 @@
     </div>
   </form>
 </section>
+
+<div class="flex flex-col">
+  <h1>Debugger</h1>
+  <div>values: {{ form.value | json }}</div>
+  <div>errors: {{ form.errors | json }}</div>
+</div>

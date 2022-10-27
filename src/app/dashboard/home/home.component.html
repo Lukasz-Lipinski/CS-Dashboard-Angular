@@ -1,8 +1,6 @@
 <div class="flex justify-center gap-10 flex-wrap items-center">
   <app-tile
-    *ngFor="let tile of tiles"
-    [icon]="tile.icon"
-    [navigation]="tile.navigation"
-    [text]="tile.text"
+    *ngFor="let tile of tiles | async"
+    [tile]="tile"
   ></app-tile>
 </div>

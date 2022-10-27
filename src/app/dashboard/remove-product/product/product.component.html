@@ -1,31 +1,27 @@
 <li
   class="grid grid-cols-7 items-center my-2"
-  [ngClass]="
-    isHeader
-      ? 'font-bold'
-      : 'py-3 px-2 border-b bg-yellow-50 hover:shadow-md rounded-md'
-  "
+  [ngClass]="isHeader ? 'font-bold' : 'py-3 px-2 rounded-md border-b-2'"
 >
   <p class="col-span-3">
-    {{ brand | uppercase }}
-    {{ model }}
+    {{ product.brand | uppercase }}
+    {{ product.model }}
   </p>
-  <p>{{ price }}</p>
-  <p>{{ category }}</p>
-  <p>{{ subcategory }}</p>
+  <p>{{ product.price }}</p>
+  <p>{{ product.category }}</p>
+  <p>{{ product.subcategory }}</p>
 
   <div class="justify-self-end">
     <button
       (click)="remove()"
       *ngIf="!isHeader"
-      class="px-3 py-1 mr-2 border-2 rounded bg-red-500 text-white font-bold hover:bg-red-300"
+      class="px-3 py-1 mr-2 border-2 rounded bg-danger-primary text-white font-bold hover:bg-danger-hover active:bg-danger-clicked"
     >
       &minus;
     </button>
     <button
       *ngIf="!isHeader"
       (click)="update()"
-      class="text-white px-3 py-1 bg-yellow-300"
+      class="px-3 py-1 bg-primary hover:bg-primary-hover"
     >
       modyfikuj
     </button>

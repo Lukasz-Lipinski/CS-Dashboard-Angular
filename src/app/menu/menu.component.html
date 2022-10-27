@@ -1,13 +1,13 @@
 <nav class="group box-border text-lg w-full mb-8">
   <div
-    class="flex justify-between group-hover:translate-y-0 ease-in-out duration-150 -translate-y-full shadow-lg bg-yellow-100"
+    class="flex justify-between group-hover:translate-y-0 ease-in-out duration-150 -translate-y-full shadow-lg bg-primary"
   >
     <ul class="flex items-center gap-2">
       <li *ngFor="let link of upperMenuLinks">
         <a
           [routerLink]="link.href"
-          class="px-3 py-6 rounded hover:bg-gray-50 hover:text-red-200 flex"
-          routerLinkActive="text-red-400"
+          class="px-3 py-6 rounded hover:bg-primary-hover flex"
+          routerLinkActive="text-danger-hover"
           [routerLinkActiveOptions]="{ exact: true }"
         >
           <span class="material-icons pr-1">{{ link.icon }}</span>
@@ -18,7 +18,7 @@
       </li>
     </ul>
     <button
-      class="px-4 py-6 rounded hover:bg-gray-50 hover:text-red-200 flex items-center gap-2"
+      class="px-3 py-6 rounded hover:bg-primary hover:text-danger-hover flex"
       (click)="logout()"
     >
       <span class="material-icons">logout</span>

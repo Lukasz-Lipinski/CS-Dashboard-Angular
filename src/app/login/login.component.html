@@ -1,17 +1,17 @@
 <div class="flex justify-center items-center w-full h-screen">
   <section
-    class="flex justify-center items-center border-4 border-yellow-400 shadow-xl rounded-md"
+    class="flex justify-center items-center outline outline-3 outline-primary-dark shadow-xl rounded-md"
   >
     <form
       [formGroup]="panelForm"
       (submit)="submit()"
-      class="flex flex-col p-10 gap-3 bg-yellow-200"
+      class="flex flex-col p-10 gap-3 bg-primary"
     >
       <label *ngFor="let label of labels" class="flex justify-between">
         <span class="pr-4 text-xl"> {{ label.inputName | upperletter }}: </span>
         <input
           [type]="label.inputType"
-          class="border-2 rounded p-1 text-lg"
+          class="border-2 rounded py-1 px-2 text-lg"
           [formControlName]="label.inputName"
         />
       </label>
@@ -38,8 +38,8 @@
         class="rounded px-2 py-3 shadow-md mt-6 border-2 cursor-pointer"
         [ngClass]="
           panelForm.valid
-            ? 'border-lime-500 hover:bg-lime-200 bg-lime-300'
-            : 'border-red-500 hover:bg-red-400 text-red-600 bg-red-400 cursor-not-allowed'
+            ? 'border-lime-500 hover:bg-accept-hover bg-accept-primary active:bg-accept-primary'
+            : 'border-danger-clicked border-2 text-white bg-danger-primary cursor-not-allowed'
         "
         type="submit"
       >

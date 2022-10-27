@@ -7,20 +7,16 @@ import {
   OnChanges,
 } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Observable } from 'rxjs';
 import { Product } from '../../add-product/add-product.component';
 
 @Component({
-  selector: 'app-product',
+  selector: 'app-product[product]',
   templateUrl: './product.component.html',
   styleUrls: ['./product.component.css'],
 })
 export class ProductComponent implements OnInit {
-  @Input() brand: string = '';
-  @Input() model: string = '';
-  @Input() price: number | string = '';
-  @Input() category: string = '';
-  @Input() subcategory: string = '';
-  @Input() description: string = '';
+  @Input() product!: Product;
   @Input() isHeader: boolean = false;
   @Output() removeEmitter = new EventEmitter<Product>();
 
@@ -29,22 +25,14 @@ export class ProductComponent implements OnInit {
   ngOnInit(): void {}
 
   remove() {
-    const product: Product = {
-      brand: this.brand,
-      description: this.description,
-      model: this.model,
-      price: +this.price,
-      subcategory: this.subcategory,
-      category: this.category,
-    };
-    this.removeEmitter.emit(product);
+    this.removeEmitter.emit(this.product);
   }
 
   update() {
     this.router.navigate(['/dashboard/update'], {
       queryParams: {
-        brand: this.brand,
-        model: this.model,
+        brand: this.product.brand,
+        model: this.product.model,
       },
     });
   }

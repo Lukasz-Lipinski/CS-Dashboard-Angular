@@ -2,7 +2,7 @@
   <form
     [formGroup]="addProductForm"
     (submit)="submit()"
-    class="grid grid-cols-1 border-2 rounded-md shadow-lg pt-8 pb-4 px-8 gap-2 text-lg bg-yellow-100 border-yellow-300 min-w-[500px]"
+    class="grid grid-cols-1 outline outline-2 outline-[#ffc300] rounded-md shadow-lg pt-8 pb-4 px-8 gap-2 text-lg bg-gradient-to-b from-primary to-[#ffc300] min-w-[500px]"
   >
     <label
       *ngFor="let label of labels"
@@ -13,7 +13,7 @@
         {{ (label.text === "cena" ? "[pln]" : "") | uppercase }}</span
       >
       <input
-        class="w-9/12 border-2 rounded-lg px-2 py-1 text-base"
+        class="w-9/12 border-2 border-primary-dark rounded-lg px-2 py-1 text-base"
         [type]="label.inputType"
         [name]="label.text"
         [formControlName]="label.inputName"
@@ -21,7 +21,7 @@
     </label>
 
     <div
-      class="grid grid-cols-2 gap-4 justify-center items-center p-4 border-[1px] border-yellow-300"
+      class="grid grid-cols-2 gap-4 justify-center items-center p-4 outline outline-1 rounded outline-[#ff9500]"
     >
       <label
         class="flex justify-between"
@@ -55,8 +55,8 @@
         class="mt-8 py-3 px-6 cursor-pointer rounded"
         [ngClass]="
           addProductForm.valid
-            ? 'text-green-500 hover:bg-green-200 hover:text-green-400 transition-colors ease-linear delay-75'
-            : ' text-red-500 cursor-not-allowed'
+            ? 'bg-accept-primary hover:bg-accept-hover border-lime-500 transition-colors ease-linear delay-75'
+            : ' text-danger-primary cursor-not-allowed'
         "
         type="submit"
         [disabled]="!addProductForm.valid"
