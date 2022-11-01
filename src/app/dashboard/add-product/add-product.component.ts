@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { SnackbarComponent } from 'src/app/snackbar/snackbar.component';
-import { SnackbarDirective } from 'src/app/snackbar/snackbar.directive';
+import { SnackbarComponent } from '../../snackbar/snackbar.component';
+import { SnackbarDirective } from '../../snackbar/snackbar.directive';
 import { ProductService } from './product.service';
 
 interface Label {
