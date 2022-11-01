@@ -1,5 +1,5 @@
+import { ViewContainerRef } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
-import { ElementRef } from "@angular/core";
 import { SnackbarDirective } from "./snackbar.directive";
 
 describe("Testing Snackbar Directive", () => {
@@ -7,7 +7,11 @@ describe("Testing Snackbar Directive", () => {
   
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [SnackbarDirective]
+      declarations: [SnackbarDirective],
+      providers: [
+        SnackbarDirective,
+        {provide: ViewContainerRef}
+      ]
     }).compileComponents();
 
     directive = TestBed.inject(SnackbarDirective);
@@ -15,4 +19,8 @@ describe("Testing Snackbar Directive", () => {
   it("Should render correctly", () => {
     expect(directive).toBeDefined();
    })
+
+   it("Should initiate ViewContainerRef", () => {
+    expect(directive.viewContainerRef).toBeDefined();
+    })
 })
