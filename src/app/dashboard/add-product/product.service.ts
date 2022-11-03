@@ -52,17 +52,48 @@ export class ProductService {
     );
   }
 
-  removeProduct(product: Product): Observable<string> {
+  removeProduct(
+    product: Product
+  ): Observable<{ msg: string; isError: boolean }> {
     const newURL = `${this.url}/remove/${product.model}`;
-    return this.http.delete<string>(newURL);
+    return this.http.delete<{ msg: string; isError: boolean }>(newURL).pipe(
+      tap((response) => {
+        const { msg, isError } = response;
+        return {
+          msg: msg,
+          isError: isError,
+        };
+      }),
+      catchError((err) => {
+        throw {
+          msg: err.message,
+          isError: true,
+        };
+      })
+    );
   }
 
   updateProduct(product: Product, index: number) {
     const newURL = `${this.url}/update`;
 
-    return this.http.post<{ msg: string }>(newURL, {
-      product,
-      index,
-    });
+    return this.http
+      .post<{ msg: string; isError: boolean }>(newURL, {
+        product,
+        index,
+      })
+      .pipe(
+        tap((response) => {
+          return {
+            msg: response.msg,
+            isError: false,
+          };
+        }),
+        catchError((err) => {
+          throw {
+            msg: err.message,
+            isError: true,
+          };
+        })
+      );
   }
 }

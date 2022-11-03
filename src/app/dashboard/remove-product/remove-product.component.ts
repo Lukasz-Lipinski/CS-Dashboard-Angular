@@ -1,6 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Data } from '@angular/router';
 import { map, Observable } from 'rxjs';
+import { SnackbarComponent } from 'src/app/snackbar/snackbar.component';
+import { SnackbarDirective } from 'src/app/snackbar/snackbar.directive';
 import { Category, Product } from '../add-product/add-product.component';
 import { ProductService } from '../add-product/product.service';
 
@@ -10,6 +12,9 @@ import { ProductService } from '../add-product/product.service';
   styleUrls: ['./remove-product.component.css'],
 })
 export class RemoveProductComponent implements OnInit {
+  @ViewChild(SnackbarDirective, { static: true })
+  snackbarDirective!: SnackbarDirective;
+  snackbarComponent!: SnackbarComponent;
   searcher: string = '';
   category: Category[] = [
     {
@@ -77,12 +82,25 @@ export class RemoveProductComponent implements OnInit {
           this.allProducts = data;
         },
       });
+
+    this.snackbarComponent = new SnackbarComponent();
   }
 
   removeItem(product: Product) {
     this.productService.removeProduct(product).subscribe({
       next: (info) => {
-        console.log(info);
+        this.snackbarComponent.createSnackbar(
+          info.msg,
+          info.isError,
+          this.snackbarDirective
+        );
+      },
+      error: (err) => {
+        this.snackbarComponent.createSnackbar(
+          err.msg,
+          err.isError,
+          this.snackbarDirective
+        );
       },
     });
 

@@ -1,8 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Params } from '@angular/router';
 import { Observable } from 'rxjs';
 import { Res } from 'src/app/login/auth.service';
+import { SnackbarComponent } from 'src/app/snackbar/snackbar.component';
+import { SnackbarDirective } from 'src/app/snackbar/snackbar.directive';
 
 import { Product, Category } from '../add-product/add-product.component';
 import { ProductService } from '../add-product/product.service';
@@ -13,6 +15,9 @@ import { ProductService } from '../add-product/product.service';
   styleUrls: ['./update-product.component.css'],
 })
 export class UpdateProductComponent implements OnInit {
+  @ViewChild(SnackbarDirective, { static: true })
+  snackbarDirective!: SnackbarDirective;
+  snackbarComponent!: SnackbarComponent;
   product!: Product;
   form!: FormGroup;
   categories: Category[] = [
@@ -88,6 +93,8 @@ export class UpdateProductComponent implements OnInit {
       ]),
     });
 
+    this.snackbarComponent = new SnackbarComponent();
+
     this.setSubcategories(
       this.categories.findIndex((el) => el.name === category)
     );
@@ -116,10 +123,20 @@ export class UpdateProductComponent implements OnInit {
 
     this.productService.updateProduct(newProduct, this.productIndex).subscribe({
       next: (response) => {
-        console.log(response.msg);
+        const { msg, isError } = response;
+        this.snackbarComponent.createSnackbar(
+          msg,
+          isError,
+          this.snackbarDirective
+        );
       },
       error: (err) => {
-        console.log(err);
+        const { msg, isError } = err;
+        this.snackbarComponent.createSnackbar(
+          msg,
+          isError,
+          this.snackbarDirective
+        );
       },
     });
   }
