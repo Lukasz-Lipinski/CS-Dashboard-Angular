@@ -15,6 +15,7 @@ import { Product } from '../../add-product/add-product.component';
   styleUrls: ['./product.component.css'],
 })
 export class ProductComponent implements OnInit {
+  @Input() index!: number;
   @Input() product!: Product;
   @Input() isHeader: boolean = false;
   @Output() removeEmitter = new EventEmitter<Product>();
@@ -32,6 +33,7 @@ export class ProductComponent implements OnInit {
       queryParams: {
         brand: this.product.brand,
         model: this.product.model,
+        index: this.index,
       },
     });
   }

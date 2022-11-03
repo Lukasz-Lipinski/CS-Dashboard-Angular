@@ -17,14 +17,14 @@ type FormType = 'register' | 'signin';
 })
 export class LoginComponent implements OnInit {
   @ViewChild(SnackbarDirective, { static: true })
-  snackbarComponent!: SnackbarDirective;
+  snackbarDirective!: SnackbarDirective;
+  snackbarComponent!: SnackbarComponent;
   panelForm!: FormGroup;
   labels: Array<{ inputName: string; inputType: string }> = [
     { inputName: 'email', inputType: 'email' },
     { inputName: 'password', inputType: 'password' },
   ];
   formType: FormType = 'signin';
-  timer: any;
   subscription: Subscription = new Subscription();
 
   constructor(
@@ -39,6 +39,8 @@ export class LoginComponent implements OnInit {
       email: this.builder.control('', [Validators.required, Validators.email]),
       password: this.builder.control('', [Validators.required]),
     });
+
+    this.snackbarComponent = new SnackbarComponent();
   }
 
   setOption(text: FormType) {
@@ -64,11 +66,19 @@ export class LoginComponent implements OnInit {
           .subscribe({
             next: (res) => {
               const message: string = `${res.email} was registered successfully`;
-              this.createSnackbar(message, false);
+              this.snackbarComponent.createSnackbar(
+                message,
+                false,
+                this.snackbarDirective
+              );
             },
             error: (error: HttpErrorResponse) => {
               const { message } = error.error.error;
-              this.createSnackbar(message, true);
+              this.snackbarComponent.createSnackbar(
+                message,
+                true,
+                this.snackbarDirective
+              );
             },
           });
 
@@ -86,30 +96,18 @@ export class LoginComponent implements OnInit {
           },
           error: (error: HttpErrorResponse) => {
             const { message } = error.error.error;
-            this.createSnackbar(message, true);
+            this.snackbarComponent.createSnackbar(
+              message,
+              true,
+              this.snackbarDirective
+            );
           },
         });
       this.panelForm.reset();
     }
   }
 
-  createSnackbar(message: string, isError: boolean) {
-    let viewContainerRef = this.snackbarComponent.viewContainerRef;
-    viewContainerRef.clear();
-
-    const snackbar =
-      viewContainerRef.createComponent<SnackbarComponent>(SnackbarComponent);
-
-    snackbar.instance.isError = isError;
-    snackbar.instance.message = message;
-
-    this.timer = setTimeout(() => {
-      snackbar.destroy();
-    }, 3000);
-  }
-
   ngOnDestroy() {
     this.subscription.unsubscribe();
-    clearTimeout(this.timer);
   }
 }

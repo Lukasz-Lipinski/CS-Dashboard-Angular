@@ -1,7 +1,8 @@
 <section *ngIf="product" class="flex justify-center">
   <form
     [formGroup]="form"
-    class="flex flex-col gap-6 px-8 py-10 bg-gradient-to-b border-2 rounded-lg border-primary-dark from-primary to-primary-dark shadow-lg"
+    (submit)="updateData()"
+    class="flex flex-col gap-8 px-8 py-10 bg-gradient-to-b border-2 rounded-lg border-primary-dark from-primary to-primary-dark shadow-lg"
   >
     <div class="flex justify-between gap-5">
       <label>
@@ -20,14 +21,22 @@
           class="py-1 px-2 outline outline-primary-dark rounded"
         />
       </label>
+      <label>
+        <span class="pr-1">Cena: </span>
+        <input
+          type="text"
+          formControlName="price"
+          class="py-1 px-2 outline outline-primary-dark rounded"
+        />
+      </label>
     </div>
-    <div class="grid grid-cols-2 justify-center gap-2">
+    <div class="flex justify-center gap-8">
       <label *ngFor="let cat of categories; let i = index" class="flex">
         <input
           (click)="setSubcategories(i)"
           type="radio"
           name="category"
-          formGroupName="category"
+          formControlName="category"
           [value]="cat.name"
           [checked]="cat.name === product.category"
         />
@@ -37,16 +46,28 @@
     <div class="flex justify-center">
       <select
         class="py-1 px-3 text-center outline outline-primary-dark rounded"
+        formControlName="subcategory"
       >
         <option
           *ngFor="let sub of getSubcategories"
           [value]="sub"
-          [selected]="sub === product.subcategory"
+          [selected]="sub === product.subcategory ? sub : getSubcategories[0]"
         >
           {{ sub }}
         </option>
       </select>
     </div>
+
+    <div>
+      <label class="flex flex-col gap-4">
+        <span>Description</span>
+        <textarea
+          formControlName="description"
+          class="px-1 py-2 rounded outline outline-primary-dark"
+        ></textarea>
+      </label>
+    </div>
+
     <div class="flex justify-center pt-8">
       <button
         type="submit"
@@ -63,9 +84,3 @@
     </div>
   </form>
 </section>
-
-<div class="flex flex-col">
-  <h1>Debugger</h1>
-  <div>values: {{ form.value | json }}</div>
-  <div>errors: {{ form.errors | json }}</div>
-</div>

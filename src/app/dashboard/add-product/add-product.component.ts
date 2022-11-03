@@ -32,6 +32,7 @@ export interface Product {
 export class AddProductComponent implements OnInit {
   @ViewChild(SnackbarDirective, { static: true })
   snackbarContainer!: SnackbarDirective;
+  snackbarComponent!: SnackbarComponent;
   addProductForm!: FormGroup;
   labels: Label[] = [
     { text: 'marka', inputType: 'text', inputName: 'brand' },
@@ -99,6 +100,8 @@ export class AddProductComponent implements OnInit {
         Validators.maxLength(300),
       ]),
     });
+
+    this.snackbarComponent = new SnackbarComponent();
   }
 
   submit() {
@@ -116,25 +119,22 @@ export class AddProductComponent implements OnInit {
       };
 
       this.addProductService.addProduct(newProduct).subscribe({
-        next: (msg) => {
-          this.createSnackbar(msg);
+        next: (response) => {
+          const { isError, msg } = response;
+          this.snackbarComponent.createSnackbar(
+            msg,
+            isError,
+            this.snackbarContainer
+          );
         },
         error: (error) => {
-          this.createSnackbar(error);
+          this.snackbarComponent.createSnackbar(
+            error.msg,
+            error.isError,
+            this.snackbarContainer
+          );
         },
       });
     }
   }
-
-  createSnackbar({ msg, isError }: { msg: string; isError: boolean }) {
-    const viewContainerRef = this.snackbarContainer.viewContainerRef;
-    viewContainerRef.clear();
-
-    const snackbar = viewContainerRef.createComponent(SnackbarComponent);
-
-    snackbar.instance.isError = isError;
-    snackbar.instance.message = msg;
-  }
-
-  ngOnDestroy() {}
 }

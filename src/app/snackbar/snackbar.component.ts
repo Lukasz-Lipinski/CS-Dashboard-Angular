@@ -1,4 +1,5 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, ViewContainerRef } from '@angular/core';
+import { SnackbarDirective } from './snackbar.directive';
 
 @Component({
   selector: 'app-snackbar',
@@ -17,6 +18,24 @@ export class SnackbarComponent implements OnInit {
     }, 3000);
   }
 
+  createSnackbar(
+    message: string,
+    isError: boolean,
+    component: SnackbarDirective
+  ) {
+    let viewContainerRef = component.viewContainerRef;
+    viewContainerRef.clear();
+
+    const snackbar =
+      viewContainerRef.createComponent<SnackbarComponent>(SnackbarComponent);
+
+    snackbar.instance.isError = isError;
+    snackbar.instance.message = message;
+
+    this.timer = setTimeout(() => {
+      snackbar.destroy();
+    }, 3000);
+  }
   ngOnDestroy() {
     clearTimeout(this.timer);
   }

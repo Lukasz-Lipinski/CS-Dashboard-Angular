@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Params } from '@angular/router';
+import { Observable } from 'rxjs';
+import { Res } from 'src/app/login/auth.service';
 
 import { Product, Category } from '../add-product/add-product.component';
 import { ProductService } from '../add-product/product.service';
@@ -46,11 +48,15 @@ export class UpdateProductComponent implements OnInit {
       subcategories: ['Apple', 'Samsung', 'Nokia', 'Motorola', 'Lenovo'],
     },
   ];
+  private subcategories!: string[];
+  productIndex!: number;
   subcategoryIndex!: number;
+  response!: Observable<Res>;
 
   constructor(
-    private activatedRoute: ActivatedRoute,
-    private fb: FormBuilder
+    private readonly activatedRoute: ActivatedRoute,
+    private readonly fb: FormBuilder,
+    private readonly productService: ProductService
   ) {}
 
   ngOnInit() {
@@ -60,10 +66,17 @@ export class UpdateProductComponent implements OnInit {
         this.product = product;
       },
     });
+
+    this.activatedRoute.queryParams.subscribe({
+      next: (params: Params) => {
+        this.productIndex = params['index'];
+      },
+    });
+
     const { brand, category, description, model, price, subcategory } =
       this.product;
 
-    this.form = this.fb.group({
+    this.form = this.fb.nonNullable.group({
       brand: this.fb.control(brand, [Validators.required]),
       model: this.fb.control(model, [Validators.required]),
       price: this.fb.control(+price, [Validators.min(0), Validators.required]),
@@ -80,11 +93,34 @@ export class UpdateProductComponent implements OnInit {
     );
   }
 
-  setSubcategories(i: number) {
-    this.subcategoryIndex = i;
+  get getSubcategories() {
+    return this.subcategories;
   }
 
-  get getSubcategories() {
-    return this.categories[this.subcategoryIndex].subcategories;
+  setSubcategories(i: number) {
+    this.subcategories = this.categories[i].subcategories;
+  }
+
+  updateData() {
+    const { brand, category, description, model, price, subcategory } =
+      this.form.controls;
+
+    const newProduct: Product = {
+      brand: brand.value,
+      model: model.value,
+      price: price.value,
+      category: category.value,
+      subcategory: subcategory.value,
+      description: description.value,
+    };
+
+    this.productService.updateProduct(newProduct, this.productIndex).subscribe({
+      next: (response) => {
+        console.log(response.msg);
+      },
+      error: (err) => {
+        console.log(err);
+      },
+    });
   }
 }

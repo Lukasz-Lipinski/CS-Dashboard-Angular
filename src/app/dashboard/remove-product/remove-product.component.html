@@ -17,8 +17,9 @@
       <hr class="my-3" />
 
       <app-product
-        *ngFor="let product of getFoundProducts"
+        *ngFor="let product of getFoundProducts; let i = index"
         (removeEmitter)="removeItem($event)"
+        [index]="i"
         [product]="product"
       ></app-product>
     </ul>
