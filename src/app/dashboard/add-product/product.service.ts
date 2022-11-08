@@ -1,7 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { catchError, filter, map, Observable, of, tap } from 'rxjs';
-import { Res } from 'src/app/login/auth.service';
+import { catchError, map, Observable, tap } from 'rxjs';
 import { Product } from './add-product.component';
 
 @Injectable({
@@ -23,8 +22,6 @@ export class ProductService {
           };
         }),
         catchError((err) => {
-          console.log(err);
-
           throw {
             msg: err.message,
             isError: true,
