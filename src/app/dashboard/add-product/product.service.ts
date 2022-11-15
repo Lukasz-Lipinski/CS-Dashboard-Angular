@@ -7,7 +7,8 @@ import { Product } from './add-product.component';
   providedIn: 'root',
 })
 export class ProductService {
-  url: string = 'http://localhost:3000/products';
+  url: string = 'https://cs-dashboard-nest-js-deploy.vercel.app/products';
+
   constructor(private http: HttpClient) {}
 
   addProduct(product: Product): Observable<{ msg: string; isError: boolean }> {
