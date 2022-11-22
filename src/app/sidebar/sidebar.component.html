@@ -1,13 +1,17 @@
-<nav class="position-absolute h-50 navbar sidebar-collapse">
-  <ul class="list-unstyled">
+<nav
+  class="d-flex h-100 top-0 align-items-center navbar sidebar-collapse bg-transparent"
+>
+  <ul
+    class="navbar-nav list-unstyled bg-light py-4 px-2 border-2 rounded shadow-sm"
+  >
     <li *ngFor="let link of sidebarLinks">
       <a
-        class="p-3 flex items-center hover:bg-primary-hover"
+        class="d-flex gap-2 p-2 nav-link"
         [routerLink]="link.href"
-        routerLinkActive="text-danger-hover"
+        routerLinkActive="active"
       >
-        <span class="material-icons pr-3">{{ link.icon }}</span>
-        <p>{{ link.label }}</p>
+        <span class="material-icons">{{ link.icon }}</span>
+        <span>{{ link.label }}</span>
       </a>
     </li>
   </ul>
