@@ -1,52 +1,46 @@
-<div class="flex justify-center items-center w-full h-screen">
-  <section
-    class="flex justify-center items-center outline outline-3 outline-primary-dark shadow-xl rounded-md"
-  >
-    <form
-      [formGroup]="panelForm"
-      (submit)="submit()"
-      class="flex flex-col p-10 gap-3 bg-primary"
+<form
+  [formGroup]="panelForm"
+  (submit)="submit()"
+  class="d-flex flex-column p-3 border-1 border shadow-sm"
+>
+  <label *ngFor="let label of labels" class="d-flex justify-content-between">
+    <span class="pe-3"> {{ label.inputName | upperletter }}: </span>
+    <input
+      [type]="label.inputType"
+      class="border-1 rounded py-1 px-2"
+      [formControlName]="label.inputName"
+    />
+  </label>
+
+  <div class="justify-content-center w-100">
+    <a
+      (click)="setOption('register')"
+      class="link-info"
+      [ngClass]="formType === 'register' ? '' : ''"
     >
-      <label *ngFor="let label of labels" class="flex justify-between">
-        <span class="pr-4 text-xl"> {{ label.inputName | upperletter }}: </span>
-        <input
-          [type]="label.inputType"
-          class="border-2 rounded py-1 px-2 text-lg"
-          [formControlName]="label.inputName"
-        />
-      </label>
+      Rejestracja
+    </a>
+    <span class="px-2 py-3"> | </span>
+    <a
+      (click)="setOption('signin')"
+      class="link-info"
+      [ngClass]="formType === 'signin' ? 'text-blue-400' : ''"
+    >
+      Logowanie
+    </a>
+  </div>
 
-      <div class="flex justify-center text-base text-blue-800">
-        <button
-          (click)="setOption('register')"
-          class="px-2 py-3 hover:underline"
-          [ngClass]="formType === 'register' ? 'text-blue-400' : ''"
-        >
-          Rejestracja
-        </button>
-        <span class="px-2 py-3"> | </span>
-        <button
-          (click)="setOption('signin')"
-          class="px-2 py-3 hover:underline"
-          [ngClass]="formType === 'signin' ? 'text-blue-400' : ''"
-        >
-          Logowanie
-        </button>
-      </div>
-
-      <button
-        class="rounded px-2 py-3 shadow-md mt-6 border-2 cursor-pointer"
-        [ngClass]="
-          panelForm.valid
-            ? 'border-lime-500 hover:bg-accept-hover bg-accept-primary active:bg-accept-primary'
-            : 'border-danger-clicked border-2 text-white bg-danger-primary cursor-not-allowed'
-        "
-        type="submit"
-      >
-        {{ formType === "register" ? "Zarejestruj" : "Zaloguj" }}
-      </button>
-    </form>
-  </section>
-</div>
+  <button
+    class="btn btn-primary"
+    [ngClass]="
+      panelForm.valid
+        ? 'border-lime-500 hover:bg-accept-hover bg-accept-primary active:bg-accept-primary'
+        : 'border-danger-clicked border-2 text-white bg-danger-primary cursor-not-allowed'
+    "
+    type="submit"
+  >
+    {{ formType === "register" ? "Zarejestruj" : "Zaloguj" }}
+  </button>
+</form>
 
 <ng-template appSnackbar></ng-template>

@@ -10,8 +10,7 @@ app.use([cors(), express.json(), bodyParser.urlencoded({ extended: false })]);
 const products = [];
 
 const deleteProduct = (model) => {
-  const productIndex = products.indexOf((item) => item.model === model);
-
+  const productIndex = products.findIndex((el) => el.model === model);
   products.splice(productIndex, 1);
   return products;
 };
