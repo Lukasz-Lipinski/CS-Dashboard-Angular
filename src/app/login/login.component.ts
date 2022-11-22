@@ -96,6 +96,9 @@ export class LoginComponent implements OnInit {
           },
           error: (error: HttpErrorResponse) => {
             const { message } = error.error.error;
+
+            console.log(message);
+
             this.snackbarComponent.createSnackbar(
               message,
               true,

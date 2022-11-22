@@ -1,15 +1,5 @@
-<div
-  class="fixed z-100 bottom-1 left-0 flex justify-center w-full items-center"
-  *ngIf="message"
->
-  <p
-    class="border-2 p-4 text-lg rounded-md shadow"
-    [ngClass]="
-      isError
-        ? 'bg-red-400 border-red-600 text-red-600'
-        : 'bg-lime-300 border-2 border-lime-500 text-lime-500'
-    "
-  >
+<div class="toast-container position-fixed" *ngIf="message">
+  <p class="toast-body" [ngClass]="isError ? 'bg-success' : 'bg-danger'">
     {{ message }}
   </p>
 </div>

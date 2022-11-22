@@ -2,22 +2,27 @@
   <form
     [formGroup]="panelForm"
     (submit)="submit()"
-    class="d-flex flex-column p-3 border-1 border shadow-sm"
+    class="d-flex flex-column p-5 gap-4 rounded-2 shadow-sm"
   >
-    <label *ngFor="let label of labels" class="d-flex justify-content-between">
-      <span class="pe-3"> {{ label.inputName | upperletter }}: </span>
-      <input
-        [type]="label.inputType"
-        class="border-1 rounded py-1 px-2"
-        [formControlName]="label.inputName"
-      />
-    </label>
+    <div class="d-flex gap-1 flex-column">
+      <label
+        *ngFor="let label of labels"
+        class="d-flex justify-content-between"
+      >
+        <span class="pe-3"> {{ label.inputName | upperletter }}: </span>
+        <input
+          [type]="label.inputType"
+          class="border-1 rounded py-1 px-2"
+          [formControlName]="label.inputName"
+        />
+      </label>
+    </div>
 
-    <div class="justify-content-center w-100">
+    <div class="d-flex pointer justify-content-center align-items-center w-100">
       <a
         (click)="setOption('register')"
         class="link-info"
-        [ngClass]="formType === 'register' ? '' : ''"
+        [ngClass]="formType === 'register' ? 'selected' : ''"
       >
         Rejestracja
       </a>
@@ -25,19 +30,15 @@
       <a
         (click)="setOption('signin')"
         class="link-info"
-        [ngClass]="formType === 'signin' ? 'text-blue-400' : ''"
+        [ngClass]="formType === 'signin' ? 'selected' : ''"
       >
         Logowanie
       </a>
     </div>
 
     <button
-      class="btn btn-primary"
-      [ngClass]="
-        panelForm.valid
-          ? 'border-lime-500 hover:bg-accept-hover bg-accept-primary active:bg-accept-primary'
-          : 'border-danger-clicked border-2 text-white bg-danger-primary cursor-not-allowed'
-      "
+      class="btn"
+      [ngClass]="panelForm.valid ? 'btn-success' : 'btn-danger disabled'"
       type="submit"
     >
       {{ formType === "register" ? "Zarejestruj" : "Zaloguj" }}

@@ -1,0 +1,9 @@
+.sidebar-collapse ul {
+  transition: 0.2s ease-in-out;
+  transform: translateX(-200%);
+}
+
+.sidebar-collapse:hover ul {
+  transition: 0.2s ease-in-out;
+  transform: translateX(0);
+}

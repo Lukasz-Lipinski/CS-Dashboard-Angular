@@ -9,6 +9,7 @@ import { SnackbarModule } from './snackbar/snackbar.module';
 @NgModule({
   declarations: [AppComponent],
   imports: [BrowserModule, DashboardModule, LoginModule, SnackbarModule],
+  exports: [SnackbarModule],
   providers: [],
   bootstrap: [AppComponent],
 })

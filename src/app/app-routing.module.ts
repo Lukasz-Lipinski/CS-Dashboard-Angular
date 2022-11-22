@@ -11,6 +11,7 @@ import { HomeComponent } from './dashboard/home/home.component';
 import { UpdateProductGuard } from './dashboard/update-product/update-product.guard';
 import { RemoveProductResolver } from './dashboard/remove-product/remove-product.resolver';
 import { UpdateProductResolver } from './dashboard/update-product/update-product.resolver';
+import { DashboardGuard } from './dashboard/dashborad.guard';
 
 const routes: Routes = [
   { path: '', component: LoginComponent },

@@ -5,7 +5,6 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { LoginComponent } from './login.component';
 import { Upperletter } from './upperletter.pipe';
-import { SnackbarComponent } from '../snackbar/snackbar.component';
 import { SnackbarModule } from '../snackbar/snackbar.module';
 
 @NgModule({
