@@ -7,7 +7,7 @@ import { Product } from './add-product.component';
   providedIn: 'root',
 })
 export class ProductService {
-  url: string = 'localhost:3000/products';
+  url: string = 'http://localhost:3000/products';
 
   constructor(private http: HttpClient) {}
 
@@ -45,6 +45,8 @@ export class ProductService {
   getAllProducts(): Observable<Array<Product>> {
     return this.http.get<{ products: Array<Product> }>(this.url).pipe(
       map((val) => {
+        console.log(val);
+
         return val.products;
       })
     );
