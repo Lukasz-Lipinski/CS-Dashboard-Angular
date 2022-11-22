@@ -7,7 +7,7 @@ import { Product } from './add-product.component';
   providedIn: 'root',
 })
 export class ProductService {
-  url: string = 'https://cs-dashboard-nest-js-deploy.vercel.app/products';
+  url: string = 'localhost:3000/products';
 
   constructor(private http: HttpClient) {}
 
