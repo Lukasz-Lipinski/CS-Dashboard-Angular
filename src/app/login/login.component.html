@@ -1,46 +1,48 @@
-<form
-  [formGroup]="panelForm"
-  (submit)="submit()"
-  class="d-flex flex-column p-3 border-1 border shadow-sm"
->
-  <label *ngFor="let label of labels" class="d-flex justify-content-between">
-    <span class="pe-3"> {{ label.inputName | upperletter }}: </span>
-    <input
-      [type]="label.inputType"
-      class="border-1 rounded py-1 px-2"
-      [formControlName]="label.inputName"
-    />
-  </label>
-
-  <div class="justify-content-center w-100">
-    <a
-      (click)="setOption('register')"
-      class="link-info"
-      [ngClass]="formType === 'register' ? '' : ''"
-    >
-      Rejestracja
-    </a>
-    <span class="px-2 py-3"> | </span>
-    <a
-      (click)="setOption('signin')"
-      class="link-info"
-      [ngClass]="formType === 'signin' ? 'text-blue-400' : ''"
-    >
-      Logowanie
-    </a>
-  </div>
-
-  <button
-    class="btn btn-primary"
-    [ngClass]="
-      panelForm.valid
-        ? 'border-lime-500 hover:bg-accept-hover bg-accept-primary active:bg-accept-primary'
-        : 'border-danger-clicked border-2 text-white bg-danger-primary cursor-not-allowed'
-    "
-    type="submit"
+<section class="h-100 d-flex justify-content-center align-items-center">
+  <form
+    [formGroup]="panelForm"
+    (submit)="submit()"
+    class="d-flex flex-column p-3 border-1 border shadow-sm"
   >
-    {{ formType === "register" ? "Zarejestruj" : "Zaloguj" }}
-  </button>
-</form>
+    <label *ngFor="let label of labels" class="d-flex justify-content-between">
+      <span class="pe-3"> {{ label.inputName | upperletter }}: </span>
+      <input
+        [type]="label.inputType"
+        class="border-1 rounded py-1 px-2"
+        [formControlName]="label.inputName"
+      />
+    </label>
+
+    <div class="justify-content-center w-100">
+      <a
+        (click)="setOption('register')"
+        class="link-info"
+        [ngClass]="formType === 'register' ? '' : ''"
+      >
+        Rejestracja
+      </a>
+      <span class="px-2 py-3"> | </span>
+      <a
+        (click)="setOption('signin')"
+        class="link-info"
+        [ngClass]="formType === 'signin' ? 'text-blue-400' : ''"
+      >
+        Logowanie
+      </a>
+    </div>
+
+    <button
+      class="btn btn-primary"
+      [ngClass]="
+        panelForm.valid
+          ? 'border-lime-500 hover:bg-accept-hover bg-accept-primary active:bg-accept-primary'
+          : 'border-danger-clicked border-2 text-white bg-danger-primary cursor-not-allowed'
+      "
+      type="submit"
+    >
+      {{ formType === "register" ? "Zarejestruj" : "Zaloguj" }}
+    </button>
+  </form>
+</section>
 
 <ng-template appSnackbar></ng-template>
