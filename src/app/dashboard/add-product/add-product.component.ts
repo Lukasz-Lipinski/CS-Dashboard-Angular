@@ -4,7 +4,7 @@ import { SnackbarComponent } from '../../snackbar/snackbar.component';
 import { SnackbarDirective } from '../../snackbar/snackbar.directive';
 import { ProductService } from './product.service';
 
-interface Label {
+export interface Label {
   text: string;
   inputType: string;
   inputName: string;

@@ -1,37 +1,26 @@
-<section *ngIf="product" class="flex justify-center">
+<section *ngIf="product" class="container-fluid d-flex justify-content-center">
   <form
     [formGroup]="form"
     (submit)="updateData()"
-    class="flex flex-col gap-8 px-8 py-10 bg-gradient-to-b border-2 rounded-lg border-primary-dark from-primary to-primary-dark shadow-lg"
+    class="shadow-sm border-1 border p-4 rounded-4 d-flex gap-3 flex-column bg-info bg-opacity-25"
+    style="max-width: 500px; min-width: 450px"
   >
-    <div class="flex justify-between gap-5">
-      <label>
-        <span class="pr-1"> Firma: </span>
+    <div class="row">
+      <label class="input-group" *ngFor="let label of labels">
+        <span class="input-group-text col-2">{{ label.text | uppercase }}</span>
         <input
-          type="text"
-          formControlName="brand"
-          class="py-1 px-2 outline outline-primary-dark rounded"
-        />
-      </label>
-      <label>
-        <span class="pr-1"> Model: </span>
-        <input
-          type="text"
-          formControlName="model"
-          class="py-1 px-2 outline outline-primary-dark rounded"
-        />
-      </label>
-      <label>
-        <span class="pr-1">Cena: </span>
-        <input
-          type="text"
-          formControlName="price"
-          class="py-1 px-2 outline outline-primary-dark rounded"
+          [type]="label.inputType"
+          [formControlName]="label.inputName"
+          class="form-control col"
         />
       </label>
     </div>
-    <div class="flex justify-center gap-8">
-      <label *ngFor="let cat of categories; let i = index" class="flex">
+
+    <div class="row d-flex justify-content-center py-2">
+      <label
+        *ngFor="let cat of categories; let i = index"
+        class="col-3 d-flex gap-1"
+      >
         <input
           (click)="setSubcategories(i)"
           type="radio"
@@ -39,15 +28,14 @@
           formControlName="category"
           [value]="cat.name"
           [checked]="cat.name === product.category"
+          class=""
         />
-        <p class="pl-2">{{ cat.name }}</p>
+        <span>{{ cat.name }}</span>
       </label>
     </div>
-    <div class="flex justify-center">
-      <select
-        class="py-1 px-3 text-center outline outline-primary-dark rounded"
-        formControlName="subcategory"
-      >
+
+    <div class="row pb-4">
+      <select class="form-select" formControlName="subcategory">
         <option
           *ngFor="let sub of getSubcategories"
           [value]="sub"
@@ -59,25 +47,20 @@
     </div>
 
     <div>
-      <label class="flex flex-col gap-4">
-        <span>Description</span>
+      <label class="row">
+        <span class="form-label">Description</span>
         <textarea
           formControlName="description"
-          class="px-1 py-2 rounded outline outline-primary-dark"
+          class="rounded form-text"
         ></textarea>
       </label>
     </div>
 
-    <div class="flex justify-center pt-8">
+    <div class="d-flex justify-content-center pt-4">
       <button
         type="submit"
         [disabled]="form.invalid"
-        class="mt-8 py-3 px-6 cursor-pointer rounded"
-        [ngClass]="
-          form.valid
-            ? 'bg-accept-primary border-2 border-lime-500 text-lime-500 hover:bg-accept-hover transition-colors ease-linear delay-75'
-            : ' text-red-500 cursor-not-allowed'
-        "
+        class="btn btn-primary rounded"
       >
         Update
       </button>

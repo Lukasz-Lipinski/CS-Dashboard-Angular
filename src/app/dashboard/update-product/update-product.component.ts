@@ -6,7 +6,7 @@ import { Res } from 'src/app/login/auth.service';
 import { SnackbarComponent } from 'src/app/snackbar/snackbar.component';
 import { SnackbarDirective } from 'src/app/snackbar/snackbar.directive';
 
-import { Product, Category } from '../add-product/add-product.component';
+import { Product, Category, Label } from '../add-product/add-product.component';
 import { ProductService } from '../add-product/product.service';
 
 @Component({
@@ -20,6 +20,11 @@ export class UpdateProductComponent implements OnInit {
   snackbarComponent!: SnackbarComponent;
   product!: Product;
   form!: FormGroup;
+  labels: Label[] = [
+    { text: 'marka', inputType: 'text', inputName: 'brand' },
+    { text: 'model', inputType: 'text', inputName: 'model' },
+    { text: 'cena', inputType: 'number', inputName: 'price' },
+  ];
   categories: Category[] = [
     {
       name: 'AGD',

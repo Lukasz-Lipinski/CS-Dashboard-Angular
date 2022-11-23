@@ -47,6 +47,12 @@ app.post("/products", (req, res) => {
   });
 });
 
+app.post("/products/update", (req, res) => {
+  const { index, product } = req.body;
+  products.splice(index, 1, product);
+  res.status(200).json({ msg: "Data were updated" });
+});
+
 //DELETE METHODS
 app.delete("/products/remove/:model", (req, res) => {
   const { params } = req;

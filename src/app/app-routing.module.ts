@@ -18,7 +18,7 @@ const routes: Routes = [
   {
     path: 'dashboard',
     component: DashboardComponent,
-    // canActivate: [DashboardGuard],
+    canActivate: [DashboardGuard],
     children: [
       { path: '', component: HomeComponent },
       { path: 'profile', component: ProfileComponent },
