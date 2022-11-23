@@ -1,0 +1,8 @@
+<button
+  (click)="navigate()"
+  class="card rounded-2 d-flex justify-content-center align-items-center p-4 shadow tile"
+  style="min-width: 250px"
+>
+  <span class="material-icons display-1 fw-bold">{{ tile.icon }}</span>
+  <span class="pt-4 h5 card-text">{{ tile.text | uppercase }}</span>
+</button>

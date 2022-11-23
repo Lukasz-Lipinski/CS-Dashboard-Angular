@@ -1,0 +1,28 @@
+<div class="nav-animation">
+  <nav
+    class="navbar navbar-expand justify-content-between px-2 py-3 shadow-sm border-bottom-2 bg-light"
+  >
+    <ul class="navbar-nav">
+      <li *ngFor="let link of upperMenuLinks">
+        <a
+          [routerLink]="link.href"
+          class="nav-link d-flex align-items-center gap-2"
+          routerLinkActive="active"
+          [routerLinkActiveOptions]="{ exact: true }"
+        >
+          <span class="material-icons pr-1">{{ link.icon }}</span>
+          <span>
+            {{ link.label }}
+          </span>
+        </a>
+      </li>
+    </ul>
+    <button
+      class="btn btn-outline-danger d-flex align-items-center"
+      (click)="logout()"
+    >
+      <span class="material-icons">logout</span>
+      <span>Lougout</span>
+    </button>
+  </nav>
+</div>

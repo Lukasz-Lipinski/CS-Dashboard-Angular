@@ -1,0 +1,42 @@
+<div
+  class="d-flex flex-column p-4 gap-4 rounded-4 shadow bg-light"
+  style="min-width: 490px"
+>
+  <h1 class="h2 pb-4 text-center border-bottom">Change password</h1>
+  <label>
+    <span class="form-label">New password: </span>
+    <input
+      type="password"
+      class="form-control"
+      [(ngModel)]="newPassword"
+      name="newPassword"
+      minlength="6"
+      required
+    />
+  </label>
+
+  <label>
+    <span class="form-label"> Assign current password to proceed </span>
+    <input
+      type="password"
+      class="form-control"
+      name="currentPassword"
+      [(ngModel)]="currentPassword"
+      required
+    />
+  </label>
+
+  <div class="d-flex justify-content-center">
+    <button
+      [disabled]="
+        (!currentPassword && !newPassword) ||
+        currentPassword !== newPassword ||
+        newPassword.length < 6
+      "
+      (click)="updateData()"
+      class="btn btn-success"
+    >
+      Change
+    </button>
+  </div>
+</div>

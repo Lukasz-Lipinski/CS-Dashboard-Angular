@@ -1,0 +1,34 @@
+<div class="container-fluid">
+  <div class="row">
+    <label class="d-flex align-items-center input-group">
+      <input type="text" [(ngModel)]="searcher" class="form-control" />
+      <span class="input-group-text">
+        <i class="bi bi-search"></i>
+      </span>
+    </label>
+  </div>
+
+  <div class="row">
+    <p
+      class="display-6 py-3"
+      [ngClass]="!getFoundProducts.length ? 'text-danger' : ''"
+    >
+      Wyniki dla: {{ searcher }}
+    </p>
+  </div>
+
+  <div class="row">
+    <ul class="list-group">
+      <app-product [isHeader]="true" [product]="header"></app-product>
+      <hr class="my-3" />
+
+      <app-product
+        *ngFor="let product of getFoundProducts; let i = index"
+        (removeEmitter)="removeItem($event)"
+        [index]="i"
+        [product]="product"
+      ></app-product>
+    </ul>
+  </div>
+  <ng-template appSnackbar></ng-template>
+</div>

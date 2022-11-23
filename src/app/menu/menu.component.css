@@ -1,0 +1,10 @@
+.nav-animation nav {
+  z-index: 51;
+  transform: translateY(-200%);
+  transition: 0.2s ease-in;
+}
+
+.nav-animation:hover nav {
+  transition: 0.2s ease-out;
+  transform: translateY(0);
+}

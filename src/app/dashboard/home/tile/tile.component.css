@@ -1,0 +1,4 @@
+.tile:hover {
+  color: #fd7e14;
+  transition: 0.3s color ease-in;
+}

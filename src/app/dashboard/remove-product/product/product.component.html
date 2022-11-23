@@ -1,0 +1,32 @@
+<li
+  class="row d-flex justify-content-between"
+  [ngClass]="isHeader ? 'fw-bold' : 'py-3 px-2 rounded  list-group-item'"
+>
+  <div class="col-8 d-flex gap-5">
+    <p class="col-2">
+      {{ product.brand | uppercase }}
+      {{ product.model }}
+    </p>
+    <p class="col-1">{{ product.price }}</p>
+    <p class="col-1">{{ product.category }}</p>
+    <p class="col-1">{{ product.subcategory }}</p>
+  </div>
+  <div class="col-4 d-flex justify-content-end gap-3">
+    <button
+      data-testid="updateBtn"
+      *ngIf="!isHeader"
+      (click)="update()"
+      class="btn btn-warning"
+    >
+      modyfikuj
+    </button>
+    <button
+      data-testid="removeBtn"
+      (click)="remove()"
+      *ngIf="!isHeader"
+      class="btn btn-danger"
+    >
+      &minus;
+    </button>
+  </div>
+</li>

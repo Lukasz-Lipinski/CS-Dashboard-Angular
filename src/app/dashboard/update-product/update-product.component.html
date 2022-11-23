@@ -1,0 +1,71 @@
+<section *ngIf="product" class="container-fluid d-flex justify-content-center">
+  <form
+    [formGroup]="form"
+    (submit)="updateData()"
+    class="shadow-sm border-1 border p-4 rounded-4 d-flex gap-3 flex-column bg-info bg-opacity-25"
+    style="max-width: 500px; min-width: 450px"
+  >
+    <div class="row">
+      <label class="input-group" *ngFor="let label of labels">
+        <span class="input-group-text col-2">{{ label.text | uppercase }}</span>
+        <input
+          [type]="label.inputType"
+          [formControlName]="label.inputName"
+          class="form-control col"
+        />
+      </label>
+    </div>
+
+    <div class="row d-flex justify-content-center py-2">
+      <label
+        *ngFor="let cat of categories; let i = index"
+        class="col-3 d-flex gap-1"
+      >
+        <input
+          (click)="setSubcategories(i)"
+          type="radio"
+          name="category"
+          formControlName="category"
+          [value]="cat.name"
+          [checked]="cat.name === product.category"
+          class=""
+        />
+        <span>{{ cat.name }}</span>
+      </label>
+    </div>
+
+    <div class="row pb-4">
+      <select class="form-select" formControlName="subcategory">
+        <option
+          *ngFor="let sub of getSubcategories"
+          [value]="sub"
+          [selected]="sub === product.subcategory ? sub : getSubcategories[0]"
+        >
+          {{ sub }}
+        </option>
+      </select>
+    </div>
+
+    <div>
+      <label class="row">
+        <span class="form-label">Description</span>
+        <textarea
+          formControlName="description"
+          class="rounded form-text"
+        ></textarea>
+      </label>
+    </div>
+
+    <div class="d-flex justify-content-center pt-4">
+      <button
+        type="submit"
+        [disabled]="form.invalid"
+        class="btn btn-primary rounded"
+      >
+        Update
+      </button>
+    </div>
+  </form>
+</section>
+
+<ng-template appSnackbar></ng-template>

@@ -1,0 +1,66 @@
+<div class="d-flex pt-3 justify-content-center">
+  <form
+    [formGroup]="addProductForm"
+    (submit)="submit()"
+    class="contianer-fluid d-flex flex-column border border-2 p-4 px-4 rounded-3 shadow bg-light gap-2"
+    style="min-width: 450px; max-width: 550px"
+  >
+    <div class="row d-flex gap-2">
+      <label data-testid="label" *ngFor="let label of labels">
+        <span class="col-3"
+          >{{ label.text | uppercase }}
+          {{ (label.text === "cena" ? "[pln]" : "") | uppercase }}</span
+        >
+        <input
+          class="col-7 form-control"
+          [type]="label.inputType"
+          [name]="label.text"
+          [formControlName]="label.inputName"
+        />
+      </label>
+    </div>
+
+    <div class="row d-flex justify-content-center p-4">
+      <label
+        class="col-3 d-flex justify-content-center gap-2"
+        [for]="category.name"
+        *ngFor="let category of categories; let i = index"
+      >
+        <span>{{ category.name }}</span>
+        <input
+          class="form-check-input"
+          type="radio"
+          [id]="category.name"
+          formControlName="category"
+          [value]="category.name"
+          (click)="setSubcategory(i)"
+        />
+      </label>
+      <select class="col-2 mt-3 form-select" formControlName="subcategory">
+        <option *ngFor="let subcat of subcategory" [value]="subcat">
+          {{ subcat }}
+        </option>
+      </select>
+    </div>
+
+    <textarea
+      rows="5"
+      class="form-text"
+      placeholder="Opis produktu"
+      formControlName="description"
+    ></textarea>
+
+    <div class="d-flex justify-content-center">
+      <button
+        class="btn btn-lg mt-4"
+        [ngClass]="addProductForm.valid ? 'btn-primary' : 'btn-outline-danger'"
+        type="submit"
+        [disabled]="!addProductForm.valid"
+      >
+        Add
+      </button>
+    </div>
+  </form>
+</div>
+
+<ng-template appSnackbar></ng-template>
