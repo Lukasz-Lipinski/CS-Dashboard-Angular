@@ -16,18 +16,18 @@ const deleteProduct = (model) => {
 };
 
 //GETS METHODS
-app.get("/", (req, res) => {
+app.get("/api", (req, res) => {
   res.json({ msg: "Hello World!" });
 });
 
-app.get("/products", (req, res) => {
+app.get("/api/products", (req, res) => {
   res.status(200).json({
     products,
   });
 });
 
 //POSTS METHODS
-app.post("/products", (req, res) => {
+app.post("/api/products", (req, res) => {
   const { body } = req;
 
   const isExsist = products.find(
@@ -47,14 +47,14 @@ app.post("/products", (req, res) => {
   });
 });
 
-app.post("/products/update", (req, res) => {
+app.post("/api/products/update", (req, res) => {
   const { index, product } = req.body;
   products.splice(index, 1, product);
   res.status(200).json({ msg: "Data were updated" });
 });
 
 //DELETE METHODS
-app.delete("/products/remove/:model", (req, res) => {
+app.delete("/api/products/remove/:model", (req, res) => {
   const { params } = req;
   const lengthBeforeRemoving = products.length;
 
