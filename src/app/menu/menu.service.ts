@@ -11,7 +11,7 @@ export interface Link {
 })
 export class MenuService {
   upperMenuLinks: Link[] = [
-    { label: 'Strona główna', href: 'dashboard', icon: 'home' },
+    { label: 'Strona główna', href: '/dashboard', icon: 'home' },
     { label: 'Profil', href: 'profile', icon: 'face' },
   ];
   sideMenuLinks: Link[] = [
