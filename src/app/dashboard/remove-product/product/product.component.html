@@ -1,31 +1,32 @@
 <li
-  class="grid grid-cols-7 items-center my-2"
-  [ngClass]="isHeader ? 'font-bold' : 'py-3 px-2 rounded-md border-b-2'"
+  class="d-flex justify-content-between"
+  [ngClass]="isHeader ? 'fw-bold' : 'py-3 px-2 rounded-2 border-b-2'"
 >
-  <p class="col-span-3">
-    {{ product.brand | uppercase }}
-    {{ product.model }}
-  </p>
-  <p>{{ product.price }}</p>
-  <p>{{ product.category }}</p>
-  <p>{{ product.subcategory }}</p>
-
-  <div class="justify-self-end">
-    <button
-      data-testid="removeBtn"
-      (click)="remove()"
-      *ngIf="!isHeader"
-      class="px-3 py-1 mr-2 border-2 rounded bg-danger-primary text-white font-bold hover:bg-danger-hover active:bg-danger-clicked"
-    >
-      &minus;
-    </button>
+  <div class="col-8">
+    <p class="col-2">
+      {{ product.brand | uppercase }}
+      {{ product.model }}
+    </p>
+    <p class="col-1">{{ product.price }}</p>
+    <p class="col-1">{{ product.category }}</p>
+    <p class="col-1">{{ product.subcategory }}</p>
+  </div>
+  <div class="col-4">
     <button
       data-testid="updateBtn"
       *ngIf="!isHeader"
       (click)="update()"
-      class="px-3 py-1 bg-primary hover:bg-primary-hover"
+      class="btn btn-warning"
     >
       modyfikuj
+    </button>
+    <button
+      data-testid="removeBtn"
+      (click)="remove()"
+      *ngIf="!isHeader"
+      class="btn btn-danger"
+    >
+      &minus;
     </button>
   </div>
 </li>

@@ -1,23 +1,24 @@
 <div
-  class="flex flex-col gap-10 outline outline-3 outline-primary p-10 min-w-[490px] rounded-lg shadow-lg bg-gradient-to-b from-yellow-100 to-primary"
+  class="d-flex flex-column p-4 gap-4 rounded-4 shadow bg-light"
+  style="min-width: 490px"
 >
-  <h1 class="text-center font-bold pb-6 border-b-2 border-secondary">
-    User data
-  </h1>
-  <div class="flex flex-col gap-5 text-lg">
+  <h1 class="h2 text-center pb-4 border-bottom">User data</h1>
+  <div class="">
     <p>
-      <span class="pr-4"> Email: </span>
+      <span class="pe-2">Email:</span>
       <span>
         {{ email }}
       </span>
     </p>
     <p>
-      <span class="pr-4"> Password: </span>
+      <span class="pe-2"> Password: </span>
       <span
         >{{ getPassword }}
-        <span class="material-icons cursor-pointer" (click)="showPassword()">{{
-          isHidden ? "visibility" : "invisibility_off"
-        }}</span>
+        <i
+          class="bi"
+          [ngClass]="isHidden ? 'bi-eye-fill' : 'bi-eye-slash-fill'"
+          (click)="showPassword()"
+        ></i>
       </span>
     </p>
   </div>

@@ -1,5 +1,15 @@
-<div class="toast-container position-fixed" *ngIf="message">
-  <p class="toast-body" [ngClass]="isError ? 'bg-success' : 'bg-danger'">
-    {{ message }}
-  </p>
+<div class="d-flex justify-content-center">
+  <div
+    role="alert"
+    class="toast-container position-fixed p-3 rounded bottom-0"
+    [ngClass]="
+      isError ? 'bg-danger  border-danger' : 'bg-success  border-success'
+    "
+    *ngIf="message"
+  >
+    <div class="toast-header h4 py-1">{{ isError ? "Error" : "Success" }}</div>
+    <div class="toast-body">
+      {{ message }}
+    </div>
+  </div>
 </div>

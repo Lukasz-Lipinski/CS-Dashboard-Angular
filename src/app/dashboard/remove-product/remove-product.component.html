@@ -1,12 +1,10 @@
-<section class="flex justify-center">
-  <div class="w-3/4 p-4 grid grid-cols-1 gap-4">
-    <label class="flex items-center gap-2">
-      <input
-        type="text"
-        [(ngModel)]="searcher"
-        class="w-full p-1 px-2 rounded outline outline-1 outline-primary focus:outline-primary-dark focus:outline-2 text-2xl"
-      />
-      <span class="material-icons">search</span>
+<section class="border border-1">
+  <div class="">
+    <label class="d-flex align-items-center input-group">
+      <input type="text" [(ngModel)]="searcher" class="form-control" />
+      <span class="input-group-text">
+        <i class="bi bi-search"></i>
+      </span>
     </label>
 
     <hr />
