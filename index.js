@@ -1,11 +1,13 @@
 const express = require("express");
 const cors = require("cors");
+const path = require("path");
 const bodyParser = require("body-parser");
 
 const app = express();
 const port = 3000;
 
 app.use([cors(), express.json(), bodyParser.urlencoded({ extended: false })]);
+app.use(express.static(path.join(__dirname, "./dist/computer-shop-dashboard")));
 
 const products = [];
 
@@ -71,6 +73,17 @@ app.delete("/api/products/remove/:model", (req, res) => {
   });
 });
 
+app.get("*", (_, res) => {
+  res.sendFile(
+    path.join(_dirname, "./dist/computer-shop-dashboard/index.html"),
+    (err) => {
+      console.log(err);
+    }
+  );
+});
+
 app.listen(port, () => {
   console.log("This server works on ", port);
 });
+
+module.exports = app;
