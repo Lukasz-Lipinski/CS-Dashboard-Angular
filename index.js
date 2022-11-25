@@ -2,6 +2,7 @@ const express = require("express");
 const cors = require("cors");
 const path = require("path");
 const bodyParser = require("body-parser");
+const mongoDB = require("mongodb").MongoClient;
 
 const app = express();
 const port = 3000;
@@ -9,12 +10,17 @@ const port = 3000;
 app.use([cors(), express.json(), bodyParser.urlencoded({ extended: false })]);
 app.use(express.static(path.join(__dirname, "./dist/computer-shop-dashboard")));
 
-const products = [];
+const deleteProduct = async (model) => {
+  await (await connectToDB()).collection("products").findOneAndDelete({
+    model: model,
+  });
+};
 
-const deleteProduct = (model) => {
-  const productIndex = products.findIndex((el) => el.model === model);
-  products.splice(productIndex, 1);
-  return products;
+const connectToDB = async () => {
+  const url = `mongodb+srv://admin:admin@cluster0.cpxb3.mongodb.net/`;
+  const connection = (await mongoDB.connect(url)).db("computer-shop");
+
+  return connection;
 };
 
 //GETS METHODS
@@ -22,14 +28,24 @@ app.get("/api", (req, res) => {
   res.json({ msg: "Hello World!" });
 });
 
-app.get("/api/products", (req, res) => {
+app.get("/api/products", async (req, res) => {
+  const products = await (await connectToDB())
+    .collection("products")
+    .find()
+    .toArray();
+
   res.status(200).json({
     products,
   });
 });
 
 //POSTS METHODS
-app.post("/api/products", (req, res) => {
+app.post("/api/products", async (req, res) => {
+  const products = await (await connectToDB())
+    .collection("products")
+    .find()
+    .toArray();
+
   const { body } = req;
 
   const isExsist = products.find(
@@ -42,34 +58,44 @@ app.post("/api/products", (req, res) => {
     });
   }
 
-  products.push(body);
+  (await connectToDB()).collection("products").insertOne({
+    ...body,
+  });
 
   return res.status(200).json({
     msg: "Successful",
   });
 });
 
-app.post("/api/products/update", (req, res) => {
-  const { index, product } = req.body;
-  products.splice(index, 1, product);
-  res.status(200).json({ msg: "Data were updated" });
+app.post("/api/products/update", async (req, res) => {
+  const { oldProduct, newProduct } = req.body;
+
+  await (await connectToDB())
+    .collection("products")
+    .findOneAndReplace({ model: oldProduct.model }, { ...newProduct });
+
+  return res.status(200).json({
+    msg: "Data were updated successfully",
+  });
 });
 
 //DELETE METHODS
-app.delete("/api/products/remove/:model", (req, res) => {
+app.delete("/api/products/remove/:model", async (req, res) => {
   const { params } = req;
-  const lengthBeforeRemoving = products.length;
 
-  const lengthAfterRemoving = deleteProduct(params.model).length;
+  const isExsist = await (await connectToDB()).collection("products").findOne({
+    model: params.model,
+  });
 
-  if (lengthAfterRemoving < lengthBeforeRemoving) {
-    return res.status(200).json({
-      msg: "Removed",
+  if (!isExsist) {
+    return res.status(301).json({
+      msg: "Product not exsits!",
     });
   }
 
-  return res.status(401).json({
-    msg: "Not exsist",
+  await deleteProduct(params.model);
+  return res.status(200).json({
+    msg: "Removed",
   });
 });
 
