@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { Injectable, isDevMode } from '@angular/core';
 import { catchError, map, Observable, tap } from 'rxjs';
 import { Product } from './add-product.component';
 
@@ -7,7 +7,9 @@ import { Product } from './add-product.component';
   providedIn: 'root',
 })
 export class ProductService {
-  url: string = `https://cs-angular-deploy-lukasz-lipinski.vercel.app/api/products`;
+  url: string = isDevMode()
+    ? 'http://localhost:3000/api/products'
+    : `https://cs-angular-deploy-lukasz-lipinski.vercel.app/api/products`;
 
   constructor(private http: HttpClient) {}
 
