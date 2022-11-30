@@ -22,7 +22,7 @@
 
     <div class="row d-flex justify-content-center p-4">
       <label
-        class="col-3 d-flex justify-content-center gap-2"
+        class="col d-flex justify-content-center gap-2"
         [for]="category.name"
         *ngFor="let category of categories; let i = index"
       >
@@ -41,6 +41,22 @@
           {{ subcat }}
         </option>
       </select>
+    </div>
+
+    <div class="row">
+      <span class="d-flex justify-content-center">
+        <div class="form-check">
+          <input
+            id="specialOffering"
+            type="checkbox"
+            class="form-check-input"
+            formControlName="specialOffering"
+          />
+          <label for="specialOffering" class="form-check-label"
+            >Oferta specjalna</label
+          >
+        </div>
+      </span>
     </div>
 
     <textarea

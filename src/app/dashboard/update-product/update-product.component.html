@@ -19,7 +19,7 @@
     <div class="row d-flex justify-content-center py-2">
       <label
         *ngFor="let cat of categories; let i = index"
-        class="col-3 d-flex gap-1"
+        class="col d-flex gap-1"
       >
         <input
           (click)="setSubcategories(i)"
@@ -28,7 +28,7 @@
           formControlName="category"
           [value]="cat.name"
           [checked]="cat.name === product.category"
-          class=""
+          class="form-check-input"
         />
         <span>{{ cat.name }}</span>
       </label>
@@ -44,6 +44,20 @@
           {{ sub }}
         </option>
       </select>
+    </div>
+
+    <div class="row">
+      <span class="d-flex justify-content-center">
+        <div class="form-check">
+          <label for="specialOffering"> Oferta specjalna</label>
+          <input
+            type="checkbox"
+            id="specialOffering"
+            formControlName="specialOffering"
+            class="form-check-input"
+          />
+        </div>
+      </span>
     </div>
 
     <div>

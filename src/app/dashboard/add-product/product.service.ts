@@ -40,6 +40,7 @@ export class ProductService {
       price: 'Cena [zł]',
       category: 'Kategoria',
       subcategory: 'Podkategoria',
+      specialOffering: false,
       description: '',
     };
   }
@@ -75,13 +76,13 @@ export class ProductService {
     );
   }
 
-  updateProduct(product: Product, index: number) {
+  updateProduct(oldProduct: Product, newProduct: Product) {
     const newURL = `${this.url}/update`;
 
     return this.http
       .post<{ msg: string; isError: boolean }>(newURL, {
-        product,
-        index,
+        oldProduct,
+        newProduct,
       })
       .pipe(
         tap((response) => {

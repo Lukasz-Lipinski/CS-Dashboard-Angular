@@ -21,6 +21,7 @@ export interface Product {
   price: number | string;
   category: string;
   subcategory: string;
+  specialOffering: boolean;
   description: string;
 }
 
@@ -95,6 +96,7 @@ export class AddProductComponent implements OnInit {
       subcategory: this.builder.control(this.subcategory[0], [
         Validators.required,
       ]),
+      specialOffering: this.builder.control(false),
       description: this.builder.control('', [
         Validators.required,
         Validators.maxLength(300),
@@ -106,8 +108,15 @@ export class AddProductComponent implements OnInit {
 
   submit() {
     if (this.addProductForm.valid) {
-      const { brand, model, price, category, subcategory, description } =
-        this.addProductForm.controls;
+      const {
+        brand,
+        model,
+        price,
+        category,
+        subcategory,
+        description,
+        specialOffering,
+      } = this.addProductForm.controls;
 
       const newProduct: Product = {
         brand: brand.value,
@@ -115,6 +124,7 @@ export class AddProductComponent implements OnInit {
         price: price.value,
         category: category.value,
         subcategory: subcategory.value,
+        specialOffering: specialOffering.value,
         description: description.value,
       };
 

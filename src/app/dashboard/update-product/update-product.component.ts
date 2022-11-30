@@ -83,7 +83,7 @@ export class UpdateProductComponent implements OnInit {
       },
     });
 
-    const { brand, category, description, model, price, subcategory } =
+    const { brand, category, description, model, price, specialOffering, subcategory } =
       this.product;
 
     this.form = this.fb.nonNullable.group({
@@ -92,6 +92,7 @@ export class UpdateProductComponent implements OnInit {
       price: this.fb.control(+price, [Validators.min(0), Validators.required]),
       category: this.fb.control(category, [Validators.required]),
       subcategory: this.fb.control(subcategory, [Validators.required]),
+      specialOffering: this.fb.control(specialOffering),
       description: this.fb.control(description, [
         Validators.required,
         Validators.maxLength(300),
@@ -114,7 +115,7 @@ export class UpdateProductComponent implements OnInit {
   }
 
   updateData() {
-    const { brand, category, description, model, price, subcategory } =
+    const { brand, category, description, model, price, subcategory, specialOffering } =
       this.form.controls;
 
     const newProduct: Product = {
@@ -123,10 +124,11 @@ export class UpdateProductComponent implements OnInit {
       price: price.value,
       category: category.value,
       subcategory: subcategory.value,
+      specialOffering: specialOffering.value,
       description: description.value,
     };
 
-    this.productService.updateProduct(newProduct, this.productIndex).subscribe({
+    this.productService.updateProduct(this.product, newProduct).subscribe({
       next: (response) => {
         const { msg, isError } = response;
         this.snackbarComponent.createSnackbar(
